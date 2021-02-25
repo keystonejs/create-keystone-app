@@ -1,7 +1,12 @@
 {
   "name": "keystone-next-app",
   "version": "0.0.0",
-  "scripts": {},
+  "private": true,
+  "scripts": {
+    "dev": "keystone-next prototype",
+    "start": "keystone-next start",
+    "build": "keystone-next build"
+  },
   "dependencies": {
     "@babel/core": "^7.13.1",
     "@babel/plugin-transform-runtime": "^7.13.7",
