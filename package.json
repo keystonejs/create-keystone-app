@@ -14,7 +14,7 @@
     "@changesets/changelog-github": "^0.2.8",
     "@changesets/cli": "^2.14.1",
     "@manypkg/cli": "^0.17.0",
-    "@preconstruct/cli": "^2.0.4",
+    "@preconstruct/cli": "^2.0.5",
     "@types/fs-extra": "^9.0.7",
     "prettier": "^2.2.1",
     "typescript": "^4.1.5"

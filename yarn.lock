@@ -2967,10 +2967,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.8.4.tgz#6f1744b0f69f507a433f42874cc3b2eb4b11b337"
   integrity sha512-h0lY7g36rhjNV8KVHKS3/BEOgfsxu0AiRI8+ry5IFBGEsQFkpjxtcpVc9ndN8zrKUeMZXAWMc7eQMepfgykpxQ==
 
-"@preconstruct/cli@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@preconstruct/cli/-/cli-2.0.4.tgz#de9f6c4648b030b04e52ca01f97bdc006b7b948b"
-  integrity sha512-7kp5eWz+rSR5h7tKs84ROq6RBDbQ1D8SJ+Ca7sI80LchheEfpwwK4FXE7jlGof+ooUgVCpogvMPH6238UGe9fw==
+"@preconstruct/cli@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@preconstruct/cli/-/cli-2.0.5.tgz#bd952ecae0fbe5cba37040d7f05c41cab3ac4250"
+  integrity sha512-yWB0GwqZi9tTpSmsEkcVYxnieCT89L9938XR7s9ffjKf59GFMwy8O0G8wMA8Rm6jNjf3ob5zuVWvCaoHppUS8Q==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.7.7"
@@ -2981,7 +2981,7 @@
     "@rollup/plugin-commonjs" "^15.0.0"
     "@rollup/plugin-json" "^4.1.0"
     "@rollup/plugin-node-resolve" "^9.0.0"
-    "@rollup/plugin-replace" "^2.3.3"
+    "@rollup/plugin-replace" "^2.4.1"
     builtin-modules "^3.1.0"
     chalk "^4.1.0"
     dataloader "^2.0.0"
@@ -3248,7 +3248,7 @@
     is-module "^1.0.0"
     resolve "^1.17.0"
 
-"@rollup/plugin-replace@^2.3.3":
+"@rollup/plugin-replace@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-replace/-/plugin-replace-2.4.1.tgz#c411b5ab72809fb1bfc8b487d8d02eef661460d3"
   integrity sha512-XwC1oK5rrtRJ0tn1ioLHS6OV5JTluJF7QE1J/q1hN3bquwjnVxjtMyY9iCnoyH9DQbf92CxajB3o98wZbP3oAQ==
