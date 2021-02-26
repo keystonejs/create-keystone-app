@@ -17,7 +17,9 @@ const cli = meow(
 Usage
   $ create-keystone-next-app [directory] --database-url postgres://...
 Flags
+
   --database-url The Postgres connection string
+
 `,
   {
     flags: {
@@ -71,14 +73,14 @@ const installDeps = async (cwd: string) => {
     'Installing dependencies with yarn. This will take a few minutes.'
   );
   try {
-    await execa('yarn', ['install'], { cwd });
+    await execa('yarn', ['install'], { cwd, stdio: 'inherit' });
   } catch (_err) {
     let err: ExecaError = _err;
     if (err.failed) {
       console.log(
         'Failed to install with yarn. Installing dependencies with npm.'
       );
-      await execa('npm', ['install'], { cwd });
+      await execa('npm', ['install'], { cwd, stdio: 'inherit' });
     }
   }
 };

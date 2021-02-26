@@ -21,7 +21,8 @@
     "postinstall": "preconstruct dev && manypkg check",
     "build": "preconstruct build",
     "lint:prettier": "prettier --list-different \"**/*.{js,json,ts,tsx,md}\"",
-    "lint:types": "tsc"
+    "lint:types": "tsc",
+    "release": "yarn build && changeset publish"
   },
   "prettier": {
     "singleQuote": true
