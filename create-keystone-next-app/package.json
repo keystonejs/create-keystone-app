@@ -1,6 +1,7 @@
 {
   "name": "create-keystone-next-app",
   "version": "0.0.0",
+  "main": "dist/create-keystone-next-app.cjs.js",
   "files": [
     "dist",
     "starter",
@@ -8,10 +9,11 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.13.7",
+    "enquirer": "^2.3.6",
     "fs-extra": "^9.1.0",
     "meow": "^9.0.0",
     "package-json": "^6.5.0",
-    "enquirer": "^2.3.6",
     "semver": "^7.3.4"
   }
 }
