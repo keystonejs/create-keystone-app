@@ -8,6 +8,7 @@
     "!dist/**/*.d.ts",
     "!starter/node_modules"
   ],
+  "bin": "./bin.js",
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.7",
