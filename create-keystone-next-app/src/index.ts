@@ -45,9 +45,7 @@ async function normalizeArgs(): Promise<Args> {
   }
   let databaseUrl = cli.flags.databaseUrl;
   if (databaseUrl && !databaseUrl.startsWith('postgres://')) {
-    throw new UserError(
-      'The postgres connection string must be start with postgres://'
-    );
+    throw new UserError('The database url must be start with postgres://');
   }
   if (!databaseUrl) {
     ({ databaseUrl } = await enquirer.prompt<{ databaseUrl: string }>({
@@ -57,7 +55,7 @@ async function normalizeArgs(): Promise<Args> {
       validate: (x) =>
         x.startsWith('postgres://')
           ? true
-          : 'The url must start with postgres://',
+          : 'The database url must start with postgres://',
     }));
   }
 
