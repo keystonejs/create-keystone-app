@@ -1,5 +1,9 @@
 # create-keystone-next-app
 
+# See https://next.keystonejs.com for docs on Keystone Next
+
+---
+
 TODO:
 
 - When a release goes out with the Babel config changes, remove the default Babel config
