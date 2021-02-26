@@ -1,6 +1,7 @@
 import getPackageJson from 'package-json';
 import currentPkgJson from '../package.json';
 import * as semver from 'semver';
+
 export async function checkVersion() {
   try {
     const { version } = await getPackageJson('create-keystone-next-app');
@@ -11,7 +12,7 @@ export async function checkVersion() {
     }
     if (semver.lt(currentPkgJson.version, version)) {
       console.error(
-        "You're running an old version of create-keystone-next-app, version"
+        `You're running an old version of create-keystone-next-app, please update to ${version}`
       );
     }
   } catch (err) {

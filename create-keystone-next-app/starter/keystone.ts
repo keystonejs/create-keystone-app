@@ -33,8 +33,8 @@ const auth = createAuth({
 export default auth.withAuth(
   config({
     db: {
-      adapter: 'mongoose',
-      url: 'mongodb://localhost/basic',
+      adapter: 'prisma_postgresql',
+      url: process.env.DATABASE_URL || 'DATABASE_URL_TO_REPLACE',
     },
     ui: {
       isAccessAllowed: (context) => !!context.session?.data,
