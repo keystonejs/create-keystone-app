@@ -1,6 +1,6 @@
 {
   "name": "create-keystone-next-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/create-keystone-next-app.cjs.js",
   "files": [
     "dist",
