@@ -5,6 +5,8 @@ import enquirer from 'enquirer';
 import execa, { ExecaError } from 'execa';
 import { checkVersion } from './checkVersion';
 import { UserError } from './utils';
+import c from 'chalk';
+import terminalLink from 'terminal-link';
 
 const createKeystoneNextAppDir = path.dirname(
   require.resolve('create-keystone-next-app/package.json')
@@ -68,12 +70,13 @@ async function normalizeArgs(): Promise<Args> {
   };
 }
 
-const installDeps = async (cwd: string) => {
+const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
   console.log(
     'Installing dependencies with yarn. This will take a few minutes.'
   );
   try {
     await execa('yarn', ['install'], { cwd, stdio: 'inherit' });
+    return 'yarn';
   } catch (_err) {
     let err: ExecaError = _err;
     if (err.failed) {
@@ -81,7 +84,9 @@ const installDeps = async (cwd: string) => {
         'Failed to install with yarn. Installing dependencies with npm.'
       );
       await execa('npm', ['install'], { cwd, stdio: 'inherit' });
+      return 'npm';
     }
+    throw err;
   }
 };
 
@@ -117,7 +122,28 @@ const installDeps = async (cwd: string) => {
       );
     })(),
   ]);
-  installDeps(normalizedArgs.directory);
+  const packageManager = await installDeps(normalizedArgs.directory);
+  console.log(`🎉  Keystone created a starter project in: ${c.bold(
+    normalizedArgs.directory
+  )}
+
+  ${c.bold('To launch your app, run:')}
+
+  - cd ${normalizedArgs.directory}
+  - ${packageManager === 'yarn' ? 'yarn' : 'npm run'} dev
+
+  ${c.bold('Next steps:')}
+
+  - Edit ${c.bold(
+    `${normalizedArgs.directory}${path.sep}keystone.ts`
+  )} to customize your app.
+  - ${terminalLink('Open the Admin UI', 'http://localhost:3000')}
+  - ${terminalLink('Read the docs', 'https://next.keystonejs.com')}
+  - ${terminalLink(
+    'Star Keystone on GitHub',
+    'https://github.com/keystonejs/keystone'
+  )}
+`);
 })().catch((err) => {
   if (err instanceof UserError) {
     console.error(err.message);
