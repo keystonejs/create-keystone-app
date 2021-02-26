@@ -123,19 +123,23 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     })(),
   ]);
   const packageManager = await installDeps(normalizedArgs.directory);
-  console.log(`🎉  Keystone created a starter project in: ${c.bold(
+  const relativeProjectDir = path.relative(
+    process.cwd(),
     normalizedArgs.directory
+  );
+  console.log(`🎉  Keystone created a starter project in: ${c.bold(
+    relativeProjectDir
   )}
 
   ${c.bold('To launch your app, run:')}
 
-  - cd ${normalizedArgs.directory}
+  - cd ${relativeProjectDir}
   - ${packageManager === 'yarn' ? 'yarn' : 'npm run'} dev
 
   ${c.bold('Next steps:')}
 
   - Edit ${c.bold(
-    `${normalizedArgs.directory}${path.sep}keystone.ts`
+    `${relativeProjectDir}${path.sep}keystone.ts`
   )} to customize your app.
   - ${terminalLink('Open the Admin UI', 'http://localhost:3000')}
   - ${terminalLink('Read the docs', 'https://next.keystonejs.com')}
