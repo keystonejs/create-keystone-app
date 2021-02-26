@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import meow from 'meow';
 import enquirer from 'enquirer';
+import execa, { ExecaError } from 'execa';
 import { checkVersion } from './checkVersion';
 import { UserError } from './utils';
 
@@ -65,6 +66,23 @@ async function normalizeArgs(): Promise<Args> {
   };
 }
 
+const installDeps = async (cwd: string) => {
+  console.log(
+    'Installing dependencies with yarn. This will take a few minutes.'
+  );
+  try {
+    await execa('yarn', ['install'], { cwd });
+  } catch (_err) {
+    let err: ExecaError = _err;
+    if (err.failed) {
+      console.log(
+        'Failed to install with yarn. Installing dependencies with npm.'
+      );
+      await execa('npm', ['install'], { cwd });
+    }
+  }
+};
+
 (async () => {
   await checkVersion();
   const normalizedArgs = await normalizeArgs();
@@ -97,6 +115,7 @@ async function normalizeArgs(): Promise<Args> {
       );
     })(),
   ]);
+  installDeps(normalizedArgs.directory);
 })().catch((err) => {
   if (err instanceof UserError) {
     console.error(err.message);
