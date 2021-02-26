@@ -5,7 +5,8 @@
   "files": [
     "dist",
     "starter",
-    "!dist/**/*.d.ts"
+    "!dist/**/*.d.ts",
+    "!starter/node_modules"
   ],
   "license": "MIT",
   "dependencies": {
