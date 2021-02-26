@@ -1,0 +1,13 @@
+{
+  "extends": ["config:base"],
+  "lockFileMaintenance": { "enabled": true },
+  "prConcurrentLimit": 0,
+  "packageRules": [
+    {
+      "packagePatterns": ["keystone"],
+      "groupName": "Keystone"
+    }
+  ],
+  "rangeStrategy": "bump",
+  "timezone": "Australia/Sydney"
+}
