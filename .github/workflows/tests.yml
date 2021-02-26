@@ -83,7 +83,5 @@ jobs:
         run: yarn lint:prettier
       - name: TypeScript
         run: yarn lint:types
-      - name: ESLint
-        run: yarn lint:eslint
       - name: Preconstruct
         run: yarn build

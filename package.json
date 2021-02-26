@@ -14,10 +14,14 @@
     "@manypkg/cli": "^0.17.0",
     "@preconstruct/cli": "^2.0.4",
     "@types/fs-extra": "^9.0.7",
+    "prettier": "^2.2.1",
     "typescript": "^4.1.5"
   },
   "scripts": {
-    "postinstall": "preconstruct dev && manypkg check"
+    "postinstall": "preconstruct dev && manypkg check",
+    "build": "preconstruct build",
+    "lint:prettier": "prettier --list-different \"**/*.{js,json,ts,tsx,md}\"",
+    "lint:types": "tsc"
   },
   "prettier": {
     "singleQuote": true
