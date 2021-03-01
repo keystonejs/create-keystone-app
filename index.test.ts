@@ -95,7 +95,10 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
 
     test('change name of admin', async () => {
       await page.click('h3:has-text("Users")');
-      await page.click('a:has-text("Admin")');
+      await Promise.all([
+        page.waitForNavigation(),
+        page.click('a:has-text("Admin")'),
+      ]);
       const body = (await page.$('body'))!;
       (await findInputByLabelSibling(body, 'Name')).type('1');
       await page.click('button:has-text("Save changes")');
