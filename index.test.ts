@@ -41,7 +41,10 @@ if (process.env.CREATE_PROJECT === 'create project') {
     );
     createKeystoneAppProcess.child.stdout!.on('data', (chunk) => {
       const stringified = chunk.toString('utf8');
-      if (!stringified.includes('warning')) {
+      if (
+        // we don't want to see all the peer dep/deprecation warnings
+        !stringified.includes('warning')
+      ) {
         console.log(stringified);
       }
     });
@@ -52,10 +55,6 @@ if (process.env.CREATE_PROJECT === 'create project') {
 
 let projectDir = path.join(__dirname, 'create-keystone-next-app', 'starter');
 
-const logChunk = (chunk: any) => {
-  console.log(chunk.toString('utf8'));
-};
-
 describe.each(['prod', 'dev'] as const)('%s', (mode) => {
   let cleanupKeystoneProcess = () => {};
 
@@ -63,30 +62,34 @@ describe.each(['prod', 'dev'] as const)('%s', (mode) => {
     await cleanupKeystoneProcess();
   });
 
+  async function startKeystone(command: 'start' | 'dev') {
+    let keystoneProcess = childProcess.execFile('yarn', ['dev'], {
+      cwd: projectDir,
+      env: process.env,
+    });
+    let adminUIReady = promiseSignal();
+    let listener = (chunk: any) => {
+      let stringified = chunk.toString('utf8');
+      console.log(stringified);
+      if (stringified.includes('Admin UI and graphQL API ready')) {
+        adminUIReady.resolve();
+      }
+    };
+    keystoneProcess.stdout!.on('data', listener);
+
+    cleanupKeystoneProcess = async () => {
+      keystoneProcess.stdout!.off('data', listener);
+      // childProcess.kill will only kill the direct child process
+      // so we use tree-kill to kill the process and it's children
+      await treeKill(keystoneProcess.pid);
+    };
+
+    await adminUIReady;
+  }
+
   if (mode === 'dev') {
     test('start keystone in dev', async () => {
-      let keystoneProcess = childProcess.execFile('yarn', ['dev'], {
-        cwd: projectDir,
-        env: process.env,
-      });
-      let adminUIReady = promiseSignal();
-      let listener = (chunk: any) => {
-        let stringified = chunk.toString('utf8');
-        console.log(stringified);
-        if (stringified.includes('Admin UI and graphQL API ready')) {
-          adminUIReady.resolve();
-        }
-      };
-      keystoneProcess.stdout!.on('data', listener);
-
-      cleanupKeystoneProcess = async () => {
-        keystoneProcess.stdout!.off('data', listener);
-        // childProcess.kill will only kill the direct child process
-        // so we use tree-kill to kill the process and it's children
-        await treeKill(keystoneProcess.pid);
-      };
-
-      await adminUIReady;
+      await startKeystone('dev');
     });
   }
 
@@ -96,35 +99,15 @@ describe.each(['prod', 'dev'] as const)('%s', (mode) => {
         cwd: projectDir,
         env: process.env,
       });
+      const logChunk = (chunk: any) => {
+        console.log(chunk.toString('utf8'));
+      };
       keystoneBuildProcess.child.stdout!.on('data', logChunk);
       keystoneBuildProcess.child.stderr!.on('data', logChunk);
       await keystoneBuildProcess;
     });
     test('start keystone in prod', async () => {
-      let keystoneProcess = childProcess.execFile('yarn', ['start'], {
-        cwd: projectDir,
-        env: process.env,
-      });
-      let adminUIReady = promiseSignal();
-      let listener = (chunk: any) => {
-        let stringified = chunk.toString('utf8');
-        console.log(stringified);
-        if (stringified.includes('Admin UI and graphQL API ready')) {
-          adminUIReady.resolve();
-        }
-      };
-      keystoneProcess.stdout!.on('data', listener);
-      keystoneProcess.stderr!.on('data', listener);
-
-      cleanupKeystoneProcess = async () => {
-        keystoneProcess.stdout!.off('data', listener);
-        keystoneProcess.stderr!.off('data', listener);
-        // childProcess.kill will only kill the direct child process
-        // so we use tree-kill to kill the process and it's children
-        await treeKill(keystoneProcess.pid);
-      };
-
-      await adminUIReady;
+      await startKeystone('start');
     });
   }
 
