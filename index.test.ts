@@ -88,10 +88,7 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
       await page.click('button:has-text("Set Password")');
       await page.fill('[placeholder="New Password"]', 'password');
       await page.fill('[placeholder="Confirm Password"]', 'password');
-      await Promise.all([
-        page.waitForNavigation(),
-        page.click('button:has-text("Get started")'),
-      ]);
+      await page.click('button:has-text("Get started")');
       await page.uncheck('input[type="checkbox"]', { force: true });
       await Promise.all([
         page.waitForNavigation(),
