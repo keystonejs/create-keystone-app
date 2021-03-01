@@ -2,9 +2,10 @@ import execa from 'execa';
 import * as playwright from 'playwright';
 import tempy from 'tempy';
 import path from 'path';
+import 'leaked-handles';
 
 // this'll take a while
-jest.setTimeout(100000000000000);
+jest.setTimeout(100000);
 
 const promiseSignal = (): Promise<void> & { resolve: () => void } => {
   let resolve;
