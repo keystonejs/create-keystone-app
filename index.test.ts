@@ -2,7 +2,7 @@ import * as playwright from 'playwright';
 import childProcess from 'child_process';
 import tempy from 'tempy';
 import path from 'path';
-// import 'leaked-handles';
+import 'leaked-handles';
 import { promisify } from 'util';
 
 // this'll take a while
@@ -22,7 +22,7 @@ const promiseSignal = (): Promise<void> & { resolve: () => void } => {
 
 let cleanupKeystoneProcess = () => {};
 
-afterAll(async () => {
+afterAll(() => {
   cleanupKeystoneProcess();
 });
 
