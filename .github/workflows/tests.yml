@@ -50,6 +50,9 @@ jobs:
 
       - name: Install Dependencies
         run: yarn
+
+      - uses: microsoft/playwright-github-action@v1
+
       - name: Tests
         run: yarn jest
         env:
