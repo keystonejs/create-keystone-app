@@ -88,9 +88,15 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
       await page.click('button:has-text("Set Password")');
       await page.fill('[placeholder="New Password"]', 'password');
       await page.fill('[placeholder="Confirm Password"]', 'password');
-      await page.click('button:has-text("Get started")');
+      await Promise.all([
+        page.waitForNavigation(),
+        page.click('button:has-text("Get started")'),
+      ]);
       await page.uncheck('input[type="checkbox"]', { force: true });
-      await page.click('text=Continue');
+      await Promise.all([
+        page.waitForNavigation(),
+        await page.click('text=Continue'),
+      ]);
     });
 
     test('change name of admin', async () => {
@@ -121,7 +127,7 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
       await page.click('button:has-text("Save changes")');
     });
     afterAll(async () => {
-      browser.close();
+      await browser.close();
     });
   }
 );
