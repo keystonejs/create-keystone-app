@@ -4,9 +4,6 @@ import tempy from 'tempy';
 import path from 'path';
 // import 'leaked-handles';
 import { promisify } from 'util';
-import _treeKill from 'tree-kill';
-
-const treeKill = promisify(_treeKill);
 
 // this'll take a while
 jest.setTimeout(100000);
@@ -73,9 +70,7 @@ test('start keystone', async () => {
 
   cleanupKeystoneProcess = () => {
     keystoneProcess.stdout!.off('data', listener);
-    // childProcess.kill will only kill the direct child process
-    // not necessary the children of the child process
-    treeKill(keystoneProcess.pid);
+    keystoneProcess.kill();
   };
 
   await adminUIReady;
