@@ -54,7 +54,6 @@ let projectDir = path.join(__dirname, 'create-keystone-next-app', 'starter');
 test('start keystone', async () => {
   let keystoneProcess = execa('yarn', ['dev'], {
     cwd: projectDir,
-    all: true,
   });
   let adminUIReady = promiseSignal();
   let listener = (chunk: any) => {
@@ -64,13 +63,10 @@ test('start keystone', async () => {
       adminUIReady.resolve();
     }
   };
-  keystoneProcess.all!.on('data', listener);
+  keystoneProcess.stdout!.on('data', listener);
 
   cleanupKeystoneProcess = () => {
-    keystoneProcess.all!.off('data', listener);
-    keystoneProcess.kill('SIGTERM', {
-      forceKillAfterTimeout: 2000,
-    });
+    keystoneProcess.kill();
   };
 
   await adminUIReady;
