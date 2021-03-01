@@ -95,7 +95,7 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
       await page.uncheck('input[type="checkbox"]', { force: true });
       await Promise.all([
         page.waitForNavigation(),
-        await page.click('text=Continue'),
+        page.click('text=Continue'),
       ]);
     });
 
