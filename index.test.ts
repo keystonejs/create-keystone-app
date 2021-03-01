@@ -70,7 +70,7 @@ test('start keystone', async () => {
 
   cleanupKeystoneProcess = () => {
     keystoneProcess.stdout!.off('data', listener);
-    keystoneProcess.kill();
+    keystoneProcess.kill('SIGKILL');
   };
 
   await adminUIReady;
