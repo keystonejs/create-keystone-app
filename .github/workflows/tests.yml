@@ -54,7 +54,7 @@ jobs:
       - uses: microsoft/playwright-github-action@v1
       - run: node ./node_modules/playwright/install.js
       - name: Tests
-        run: yarn jest
+        run: yarn jest --detectOpenHandles
         env:
           CREATE_PROJECT: ${{ matrix.createProject }}
 
