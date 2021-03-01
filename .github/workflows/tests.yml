@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        createProject: ['true', 'false']
+        createProject: ['create project', 'from repo']
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -54,7 +54,7 @@ jobs:
       - uses: microsoft/playwright-github-action@v1
       - run: node ./node_modules/playwright/install.js
       - name: Tests
-        run: yarn jest --detectOpenHandles
+        run: yarn jest
         env:
           CREATE_PROJECT: ${{ matrix.createProject }}
 
