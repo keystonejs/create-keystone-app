@@ -54,9 +54,7 @@ jobs:
       - uses: microsoft/playwright-github-action@v1
       - run: node ./node_modules/playwright/install.js
       - name: Tests
-        # for some reason the handle for the keystone process that we start isn't going away on CI(though it is locally)
-        # I haven't been able to figure out how to get it to exit properly so for now, this will make jest exit after the tests run
-        run: yarn jest --forceExit
+        run: yarn jest --detectOpenHandles
         env:
           CREATE_PROJECT: ${{ matrix.createProject }}
 
