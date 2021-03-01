@@ -2,7 +2,6 @@ import execa from 'execa';
 import * as playwright from 'playwright';
 import tempy from 'tempy';
 import path from 'path';
-import { queries } from 'playwright-testing-library';
 
 // this'll take a while
 jest.setTimeout(100000000000000);
@@ -80,9 +79,9 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
       await page.goto('http://localhost:3000');
     });
     test('init user', async () => {
-      const body = (await page.$('body'))!;
-      (await findInputByLabelSibling(body, 'Name')).fill('Admin');
-      (await findInputByLabelSibling(body, 'Email')).fill(
+      await page.fill('label:has-text("Name") >> .. >> input', 'Admin');
+      await page.fill(
+        'label:has-text("Email") >> .. >> input',
         'admin@keystonejs.com'
       );
       await page.click('button:has-text("Set Password")');
@@ -102,8 +101,7 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
         page.waitForNavigation(),
         page.click('a:has-text("Admin")'),
       ]);
-      const body = (await page.$('body'))!;
-      (await findInputByLabelSibling(body, 'Name')).type('1');
+      await page.type('label:has-text("Name") >> .. >> input', '1');
       await page.click('button:has-text("Save changes")');
       await page.goto('http://localhost:3000/users');
       expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
@@ -144,17 +142,4 @@ async function deleteAllData() {
   ]);
 
   await prisma.$disconnect();
-}
-
-// the Admin UI really needs to use labels correctly
-async function findInputByLabelSibling(
-  element: playwright.ElementHandle<HTMLElement>,
-  text: string
-) {
-  const nameLabel = await queries.findByText(element, text);
-  const nameInput = await (await nameLabel.$('xpath=..'))!.$('input');
-  if (!nameInput) {
-    throw new Error('Could not find input sibling of label with text: ' + text);
-  }
-  return nameInput;
 }

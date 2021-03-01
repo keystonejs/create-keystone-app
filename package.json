@@ -21,7 +21,6 @@
     "jest": "^26.6.3",
     "leaked-handles": "^5.2.0",
     "playwright": "^1.9.1",
-    "playwright-testing-library": "^2.7.0",
     "prettier": "^2.2.1",
     "tempy": "^1.0.0",
     "typescript": "^4.2.2"
