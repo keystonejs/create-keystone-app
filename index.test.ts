@@ -133,9 +133,10 @@ describe.each(['chromium', 'webkit', 'firefox'] as const)(
 );
 
 async function deleteAllData() {
-  const {
-    PrismaClient,
-  } = require('./create-keystone-next-app/starter/.keystone/prisma/generated-client');
+  const { PrismaClient } = require(path.join(
+    projectDir,
+    './.keystone/prisma/generated-client'
+  ));
 
   let prisma = new PrismaClient();
 
