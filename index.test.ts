@@ -19,10 +19,10 @@ const promiseSignal = (): Promise<void> & { resolve: () => void } => {
 // this will open the browser in a headed mode and open the inspector
 // https://playwright.dev/docs/inspector
 
-let keystoneProcess: execa.ExecaChildProcess<string> = undefined as any;
+let cleanupKeystoneProcess = () => {};
 
 afterAll(async () => {
-  keystoneProcess.kill();
+  cleanupKeystoneProcess();
 });
 
 if (process.env.CREATE_PROJECT === 'true') {
@@ -52,18 +52,26 @@ let projectDir = path.join(__dirname, 'create-keystone-next-app', 'starter');
 
 // starting keystone is the slowest part of this so we start keystone out of the loop
 test('start keystone', async () => {
-  keystoneProcess = execa('yarn', ['dev'], {
+  let keystoneProcess = execa('yarn', ['dev'], {
     cwd: projectDir,
     all: true,
   });
   let adminUIReady = promiseSignal();
-  keystoneProcess.all!.on('data', (chunk: any) => {
+  let listener = (chunk: any) => {
     let stringified = chunk.toString('utf8');
     console.log(stringified);
     if (stringified.includes('Admin UI and graphQL API ready')) {
       adminUIReady.resolve();
     }
-  });
+  };
+  keystoneProcess.all!.on('data', listener);
+
+  cleanupKeystoneProcess = () => {
+    keystoneProcess.all!.off('data', listener);
+    keystoneProcess.kill('SIGTERM', {
+      forceKillAfterTimeout: 2000,
+    });
+  };
 
   await adminUIReady;
 });
