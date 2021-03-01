@@ -1,8 +1,9 @@
-import execa from 'execa';
 import * as playwright from 'playwright';
+import childProcess from 'child_process';
 import tempy from 'tempy';
 import path from 'path';
-import 'leaked-handles';
+// import 'leaked-handles';
+import { promisify } from 'util';
 
 // this'll take a while
 jest.setTimeout(100000);
@@ -25,19 +26,21 @@ afterAll(async () => {
   cleanupKeystoneProcess();
 });
 
+const promisifiedExecFile = promisify(childProcess.execFile);
+
 if (process.env.CREATE_PROJECT === 'true') {
   test('can create a basic project', async () => {
     const cwd = tempy.directory();
-    let createKeystoneAppProcess = execa(
+    let createKeystoneAppProcess = promisifiedExecFile(
       'node',
       [
         require.resolve('./create-keystone-next-app/bin.js'),
         'test-project',
         `--database-url=${process.env.DATABASE_URL}`,
       ],
-      { cwd, all: true }
+      { cwd }
     );
-    createKeystoneAppProcess.all!.on('data', (chunk) => {
+    createKeystoneAppProcess.child.stdout!.on('data', (chunk) => {
       const stringified = chunk.toString('utf8');
       if (!stringified.includes('warning')) {
         console.log(stringified);
@@ -52,7 +55,7 @@ let projectDir = path.join(__dirname, 'create-keystone-next-app', 'starter');
 
 // starting keystone is the slowest part of this so we start keystone out of the loop
 test('start keystone', async () => {
-  let keystoneProcess = execa('yarn', ['dev'], {
+  let keystoneProcess = childProcess.execFile('yarn', ['dev'], {
     cwd: projectDir,
   });
   let adminUIReady = promiseSignal();
@@ -66,6 +69,7 @@ test('start keystone', async () => {
   keystoneProcess.stdout!.on('data', listener);
 
   cleanupKeystoneProcess = () => {
+    keystoneProcess.stdout!.off('data', listener);
     keystoneProcess.kill();
   };
 
