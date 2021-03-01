@@ -2,7 +2,6 @@ import * as playwright from 'playwright';
 import childProcess from 'child_process';
 import tempy from 'tempy';
 import path from 'path';
-// import 'leaked-handles';
 import { promisify } from 'util';
 import _treeKill from 'tree-kill';
 

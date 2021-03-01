@@ -19,7 +19,6 @@
     "@types/fs-extra": "^9.0.7",
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3",
-    "leaked-handles": "^5.2.0",
     "playwright": "^1.9.1",
     "prettier": "^2.2.1",
     "tempy": "^1.0.0",
