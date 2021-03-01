@@ -7,49 +7,53 @@ on:
   pull_request:
 
 jobs:
-  # tests:
-  #   name: Tests
-  #   runs-on: ubuntu-latest
-  #   services:
-  #     postgres:
-  #       image: postgres:12
-  #       env:
-  #         POSTGRES_USER: keystone5
-  #         POSTGRES_PASSWORD: k3yst0n3
-  #         POSTGRES_DB: test_db
-  #       ports:
-  #         - 5432:5432
-  #   env:
-  #     DATABASE_URL: "postgres://keystone5:k3yst0n3@localhost:5432/test_db"
-  #   strategy:
-  #     fail-fast: false
-  #   steps:
-  #     - name: Checkout Repo
-  #       uses: actions/checkout@v2
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: keystone5
+          POSTGRES_PASSWORD: k3yst0n3
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+    env:
+      DATABASE_URL: 'postgres://keystone5:k3yst0n3@localhost:5432/test_db'
+    strategy:
+      fail-fast: false
+      matrix:
+        createProject: ['true', 'false']
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
 
-  #     - name: Setup Node.js 14.x
-  #       uses: actions/setup-node@main
-  #       with:
-  #         node-version: 14.x
+      - name: Setup Node.js 14.x
+        uses: actions/setup-node@main
+        with:
+          node-version: 14.x
 
-  #     - name: Get yarn cache directory path
-  #       id: yarn-cache-dir-path
-  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-  #     - uses: actions/cache@v2
-  #       id: yarn-cache
-  #       with:
-  #         path: |
-  #           ${{ steps.yarn-cache-dir-path.outputs.dir }}
-  #           node_modules
-  #         key: ${{ runner.os }}-yarn-v4-${{ hashFiles('yarn.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-yarn-v4-
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-yarn-v4-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-v4-
 
-  #     - name: Install Dependencies
-  #       run: yarn
-  #     - name: Tests
-  #       run: yarn jest
+      - name: Install Dependencies
+        run: yarn
+      - name: Tests
+        run: yarn jest
+        env:
+          CREATE_PROJECT: ${{ matrix.createProject }}
 
   linting:
     name: Linting

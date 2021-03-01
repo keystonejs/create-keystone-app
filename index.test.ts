@@ -1,14 +1,11 @@
 import execa from 'execa';
-import { chromium, ElementHandle } from 'playwright';
+import * as playwright from 'playwright';
 import tempy from 'tempy';
 import path from 'path';
 import { queries } from 'playwright-testing-library';
 
 // this'll take a while
-jest.setTimeout(10000000000000000);
-
-const sleep = (time: number) =>
-  new Promise<void>((resolve) => setTimeout(resolve, time));
+jest.setTimeout(100000000000000);
 
 const promiseSignal = (): Promise<void> & { resolve: () => void } => {
   let resolve;
@@ -18,32 +15,49 @@ const promiseSignal = (): Promise<void> & { resolve: () => void } => {
   return Object.assign(promise, { resolve: resolve as any });
 };
 
-test('can create a basic project', async () => {
-  //   const cwd = tempy.directory();
-  //   let createKeystoneAppProcess = execa(
-  //     'node',
-  //     [
-  //       require.resolve('./create-keystone-next-app/bin.js'),
-  //       'test-project',
-  //       `--database-url=${process.env.DATABASE_URL}`,
-  //     ],
-  //     { cwd, all: true }
-  //   );
-  //   let outputFromCreateKeystoneAppProcess;
-  //   createKeystoneAppProcess.all!.on('data', (chunk) => {
-  //     const stringified = chunk.toString('utf8');
-  //     if (!stringified.includes('warning')) {
-  //       console.log(stringified);
-  //     }
-  //   });
-  //   await createKeystoneAppProcess;
-  let keystoneProcess = execa('yarn', ['dev'], {
-    // cwd: path.join(cwd, 'test-project'),
-    cwd: path.join(process.cwd(), 'create-keystone-next-app', 'starter'),
+// for debugging, you'll want to set the env var PWDEBUG=1
+// this will open the browser in a headed mode and open the inspector
+// https://playwright.dev/docs/inspector
+
+let keystoneProcess: execa.ExecaChildProcess<string> = undefined as any;
+
+afterAll(async () => {
+  keystoneProcess.kill();
+});
+
+if (process.env.CREATE_PROJECT === 'true') {
+  test('can create a basic project', async () => {
+    const cwd = tempy.directory();
+    let createKeystoneAppProcess = execa(
+      'node',
+      [
+        require.resolve('./create-keystone-next-app/bin.js'),
+        'test-project',
+        `--database-url=${process.env.DATABASE_URL}`,
+      ],
+      { cwd, all: true }
+    );
+    createKeystoneAppProcess.all!.on('data', (chunk) => {
+      const stringified = chunk.toString('utf8');
+      if (!stringified.includes('warning')) {
+        console.log(stringified);
+      }
+    });
+    await createKeystoneAppProcess;
+    projectDir = path.join(cwd, 'test-project');
+  });
+}
+
+let projectDir = path.join(__dirname, 'create-keystone-next-app', 'starter');
+
+// starting keystone is the slowest part of this so we start keystone out of the loop
+test('start keystone', async () => {
+  keystoneProcess = execa('yarn', ['dev'], {
+    cwd: projectDir,
     all: true,
   });
   let adminUIReady = promiseSignal();
-  keystoneProcess.all!.on('data', (chunk) => {
+  keystoneProcess.all!.on('data', (chunk: any) => {
     let stringified = chunk.toString('utf8');
     console.log(stringified);
     if (stringified.includes('Admin UI and graphQL API ready')) {
@@ -52,26 +66,62 @@ test('can create a basic project', async () => {
   });
 
   await adminUIReady;
-
-  await deleteAllData();
-
-  let browser = await chromium.launch({ headless: false });
-  let page = await browser.newPage();
-  await page.goto('http://localhost:3000');
-  const body = (await page.$('body'))!;
-  (await findInputByLabelSibling(body, 'Name')).type('Admin');
-  (await findInputByLabelSibling(body, 'Email')).type('admin@keystonejs.com');
-  await page.click('button:has-text("Set Password")');
-  await page.type('[placeholder="New Password"]', 'password');
-  await page.type('[placeholder="Confirm Password"]', 'password');
-  await page.click('button:has-text("Get started")');
-  await page.uncheck('input[type=checkbox]', { force: true });
-  await page.click('text=Continue');
-  await page.click('h3:has-text("Users")');
-  await sleep(5000);
-  await browser.close();
-  keystoneProcess.cancel();
 });
+
+describe.each(['chromium', 'webkit', 'firefox'] as const)(
+  '%s',
+  (browserName) => {
+    let page: playwright.Page = undefined as any;
+    let browser: playwright.Browser = undefined as any;
+    beforeAll(async () => {
+      await deleteAllData();
+      browser = await playwright[browserName].launch();
+      page = await browser.newPage();
+      await page.goto('http://localhost:3000');
+    });
+    test('init user', async () => {
+      const body = (await page.$('body'))!;
+      (await findInputByLabelSibling(body, 'Name')).fill('Admin');
+      (await findInputByLabelSibling(body, 'Email')).fill(
+        'admin@keystonejs.com'
+      );
+      await page.click('button:has-text("Set Password")');
+      await page.fill('[placeholder="New Password"]', 'password');
+      await page.fill('[placeholder="Confirm Password"]', 'password');
+      await page.click('button:has-text("Get started")');
+      await page.uncheck('input[type="checkbox"]', { force: true });
+      await page.click('text=Continue');
+    });
+
+    test('change name of admin', async () => {
+      await page.click('h3:has-text("Users")');
+      await page.click('a:has-text("Admin")');
+      const body = (await page.$('body'))!;
+      (await findInputByLabelSibling(body, 'Name')).type('1');
+      await page.click('button:has-text("Save changes")');
+      await page.goto('http://localhost:3000/users');
+      expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
+    });
+
+    test('create post', async () => {
+      await Promise.all([
+        page.waitForNavigation(),
+        page.click('nav >> text=Posts'),
+      ]);
+      await page.click('button:has-text("Create Post")');
+      await page.fill('input[type="text"]', 'content');
+      await Promise.all([
+        page.waitForNavigation(),
+        page.click('form[role="dialog"] button:has-text("Create Post")'),
+      ]);
+      await page.type('input[type="text"]', '1');
+      await page.click('button:has-text("Save changes")');
+    });
+    afterAll(async () => {
+      browser.close();
+    });
+  }
+);
 
 async function deleteAllData() {
   const {
@@ -91,10 +141,13 @@ async function deleteAllData() {
 
 // the Admin UI really needs to use labels correctly
 async function findInputByLabelSibling(
-  element: ElementHandle<HTMLElement>,
+  element: playwright.ElementHandle<HTMLElement>,
   text: string
 ) {
   const nameLabel = await queries.findByText(element, text);
   const nameInput = await (await nameLabel.$('xpath=..'))!.$('input');
-  return nameInput!;
+  if (!nameInput) {
+    throw new Error('Could not find input sibling of label with text: ' + text);
+  }
+  return nameInput;
 }
