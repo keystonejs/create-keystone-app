@@ -63,7 +63,7 @@ describe.each(['prod', 'dev'] as const)('%s', (mode) => {
   });
 
   async function startKeystone(command: 'start' | 'dev') {
-    let keystoneProcess = childProcess.execFile('yarn', ['dev'], {
+    let keystoneProcess = childProcess.execFile('yarn', [command], {
       cwd: projectDir,
       env: process.env,
     });
