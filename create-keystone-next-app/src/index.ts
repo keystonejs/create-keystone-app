@@ -96,7 +96,6 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
   await fs.mkdir(normalizedArgs.directory);
   await Promise.all([
     ...[
-      '.babelrc',
       '.gitignore',
       'schema.ts',
       'package.json',
