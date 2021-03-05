@@ -71,7 +71,7 @@ describe.each(['prod', 'dev'] as const)('%s', (mode) => {
     let listener = (chunk: any) => {
       let stringified = chunk.toString('utf8');
       console.log(stringified);
-      if (stringified.includes('Admin UI and graphQL API ready')) {
+      if (stringified.includes('API ready')) {
         adminUIReady.resolve();
       }
     };
