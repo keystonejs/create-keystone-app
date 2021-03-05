@@ -3126,10 +3126,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.8.6.tgz#ad75ebe8dbecfa145af3c7e4d0ae98016458d005"
   integrity sha512-1oXH2bAFXz9SttE1v/0Jp+2ZVePsPEAPGIuPKrmljWZcS3FPBEn2Q4WcANozZC0YiCjTWOF55k0g6rbSZS39ew==
 
-"@preconstruct/cli@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@preconstruct/cli/-/cli-2.0.5.tgz#bd952ecae0fbe5cba37040d7f05c41cab3ac4250"
-  integrity sha512-yWB0GwqZi9tTpSmsEkcVYxnieCT89L9938XR7s9ffjKf59GFMwy8O0G8wMA8Rm6jNjf3ob5zuVWvCaoHppUS8Q==
+"@preconstruct/cli@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@preconstruct/cli/-/cli-2.0.6.tgz#1abc9235176cf579f27caaaa5d498c73dddcbd93"
+  integrity sha512-qdulyG9OEGyAsWa9WG2su4u2n6sn/RkUVe/YcOLOjHXJBH+8MNijC0C0Xow/zCfdDUjzM2qMpzMB8zaTWQOoLA==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.7.7"
@@ -3668,13 +3668,6 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/fs-capacitor/-/fs-capacitor-2.0.0.tgz#17113e25817f584f58100fb7a08eed288b81956e"
   integrity sha512-FKVPOCFbhCvZxpVAMhdBdTfVfXUpsh15wFHgqOKxh9N9vzWZVuWCSijZ5T4U34XYNnuj2oduh6xcs1i+LPI+BQ==
-  dependencies:
-    "@types/node" "*"
-
-"@types/fs-extra@^9.0.7":
-  version "9.0.7"
-  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-9.0.7.tgz#a9ef2ffdab043def080c5bec94c03402f793577f"
-  integrity sha512-YGq2A6Yc3bldrLUlm17VNWOnUbnEzJ9CMgOeLFtQF3HOCN5lQBO8VyjG00a5acA5NNSM30kHVGp1trZgnVgi1Q==
   dependencies:
     "@types/node" "*"
 
