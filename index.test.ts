@@ -55,7 +55,9 @@ if (process.env.CREATE_PROJECT === 'create project') {
 
 let projectDir = path.join(__dirname, 'create-keystone-next-app', 'starter');
 
-describe.each(['prod', 'dev'] as const)('%s', (mode) => {
+// the order here is important
+// dev will initialise the database for prod
+describe.each(['dev', 'prod'] as const)('%s', (mode) => {
   let cleanupKeystoneProcess = () => {};
 
   afterAll(async () => {
