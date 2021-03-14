@@ -1,5 +1,11 @@
 # create-keystone-next-app
 
+## 1.1.0
+
+### Minor Changes
+
+- [#24](https://github.com/keystonejs/create-keystone-next-app/pull/24) [`736c845`](https://github.com/keystonejs/create-keystone-next-app/commit/736c845d677e8520cb2263b5ae9122c1cc1590bf) Thanks [@mitchellhamilton](https://github.com/mitchellhamilton)! - Updated Keystone
+
 ## 1.0.0
 
 ### Major Changes
