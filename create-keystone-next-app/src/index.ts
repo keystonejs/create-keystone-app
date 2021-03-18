@@ -72,7 +72,9 @@ async function normalizeArgs(): Promise<Args> {
 }
 
 const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
-  const spinner = ora('Installing dependencies with yarn. This may take a few minutes.').start();
+  const spinner = ora(
+    'Installing dependencies with yarn. This may take a few minutes.'
+  ).start();
   try {
     await execa('yarn', ['install'], { cwd });
     spinner.succeed('Installed dependencies with yarn.');
@@ -81,7 +83,9 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     let err: ExecaError = _err;
     if (err.failed) {
       spinner.warn('Failed to install with yarn.');
-      spinner.start(Installing dependencies with npm. This may take a few minutes.');
+      spinner.start(
+        'Installing dependencies with npm. This may take a few minutes.'
+      );
       try {
         await execa('npm', ['install'], { cwd });
         spinner.succeed('Installed dependencies with npm.');
