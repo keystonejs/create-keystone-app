@@ -41,6 +41,7 @@ type Args = {
 async function normalizeArgs(): Promise<Args> {
   let directory = cli.input[0];
   if (!directory) {
+    process.stdout.write('\n'); // needed because `yarn create` or `npx` doesn't end with a new line
     ({ directory } = await enquirer.prompt({
       type: 'input',
       name: 'directory',
