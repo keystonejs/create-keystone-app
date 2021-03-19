@@ -2,3 +2,4 @@ tsconfig.json
 dist
 CHANGELOG.md
 .changeset
+.keystone
