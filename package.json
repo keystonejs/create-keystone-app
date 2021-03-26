@@ -31,6 +31,7 @@
     "format": "prettier --write \"**/*.{js,json,ts,tsx,md}\"",
     "lint:prettier": "prettier --list-different \"**/*.{js,json,ts,tsx,md}\"",
     "lint:types": "tsc",
+    "test": "yarn lint:prettier && yarn lint:types",
     "release": "yarn build && changeset publish"
   },
   "prettier": {
