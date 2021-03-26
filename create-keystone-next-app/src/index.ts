@@ -109,7 +109,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     ].map((filename) =>
       fs.copyFile(
         path.join(starterDir, filename),
-        path.join(normalizedArgs.directory, filename.replace('_', '.'))
+        path.join(normalizedArgs.directory, filename.replace(/^_/, '.'))
       )
     ),
     (async () => {
