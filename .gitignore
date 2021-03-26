@@ -104,3 +104,9 @@ dist
 .tern-port
 
 .keystone
+
+# OS files
+.DS_Store
+
+# IDE files
+*.sublime-*

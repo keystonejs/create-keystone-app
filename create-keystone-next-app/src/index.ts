@@ -9,11 +9,7 @@ import { UserError } from './utils';
 import c from 'chalk';
 import terminalLink from 'terminal-link';
 
-const createKeystoneNextAppDir = path.dirname(
-  require.resolve('create-keystone-next-app/package.json')
-);
-
-const starterDir = path.join(createKeystoneNextAppDir, 'starter');
+const starterDir = path.normalize(`${__dirname}/../starter`);
 
 const cli = meow(
   `
@@ -106,14 +102,14 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
   await fs.mkdir(normalizedArgs.directory);
   await Promise.all([
     ...[
-      '.gitignore',
+      '_gitignore',
       'schema.ts',
       'package.json',
       'tsconfig.json',
     ].map((filename) =>
       fs.copyFile(
         path.join(starterDir, filename),
-        path.join(normalizedArgs.directory, filename)
+        path.join(normalizedArgs.directory, filename.replace('_', '.'))
       )
     ),
     (async () => {
