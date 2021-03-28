@@ -1,5 +1,21 @@
 # create-keystone-next-app
 
+## 1.2.0
+
+### Minor Changes
+
+- [#30](https://github.com/keystonejs/create-keystone-next-app/pull/30) [`fb45d53`](https://github.com/keystonejs/create-keystone-next-app/commit/fb45d53445ba2ec1fb30680e90c293d40c293d00) Thanks [@jesstelford](https://github.com/jesstelford)! - Updated script to show a loading spinner instead of the raw yarn or npm output.
+
+### Patch Changes
+
+- [#36](https://github.com/keystonejs/create-keystone-next-app/pull/36) [`94f9f26`](https://github.com/keystonejs/create-keystone-next-app/commit/94f9f267eea6862605ca443a83997062eeeb6b92) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies.
+
+* [#46](https://github.com/keystonejs/create-keystone-next-app/pull/46) [`9cbc860`](https://github.com/keystonejs/create-keystone-next-app/commit/9cbc8608c42c4406e574dad12e2f871754ff5450) Thanks [@dominikwilkowski](https://github.com/dominikwilkowski)! - Fixed a windows issue where the package would not run via npx or npm init
+
+- [#50](https://github.com/keystonejs/create-keystone-next-app/pull/50) [`ceca306`](https://github.com/keystonejs/create-keystone-next-app/commit/ceca306853469eda199dc3d7b1c8ee411f414e9b) Thanks [@dominikwilkowski](https://github.com/dominikwilkowski)! - Updated keystone-next dependencies
+
+* [#28](https://github.com/keystonejs/create-keystone-next-app/pull/28) [`b52d27e`](https://github.com/keystonejs/create-keystone-next-app/commit/b52d27e4d2ad447cf4a5a268c6ccda65723d8d2f) Thanks [@dominikwilkowski](https://github.com/dominikwilkowski)! - Removed a single trailing space in tsconfig.json
+
 ## 1.1.0
 
 ### Minor Changes
