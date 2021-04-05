@@ -1721,7 +1721,7 @@
     "@keystone-next/adapter-prisma-legacy" "^4.0.1"
     "@keystone-next/fields-legacy" "^24.0.0"
 
-"@keystone-next/fields-document@^3.2.0":
+"@keystone-next/fields-document@^3.2.1":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@keystone-next/fields-document/-/fields-document-3.2.1.tgz#432ad0e1b1a08fad37a5ce8f70b4a456af8e932d"
   integrity sha512-Vw1WSXT0v4LJc5HQDzPK5E3TbvxKOP1ryWgL+FEUpZnQJkHE2mJ/lkg0o6l3eMw6d2GturU1VhU3bYurvjYYxA==
@@ -1849,7 +1849,7 @@
     serialize-error "^8.0.1"
     stack-utils "^2.0.3"
 
-"@keystone-next/keystone@^14.0.0":
+"@keystone-next/keystone@^14.0.0", "@keystone-next/keystone@^14.0.1":
   version "14.0.1"
   resolved "https://registry.yarnpkg.com/@keystone-next/keystone/-/keystone-14.0.1.tgz#0784cb0728ac1ae4ce2f3e9ab282d74b441817de"
   integrity sha512-m3ElTZxHGkBOaFtRnck5p/Q+jhV8ggnxLQj4mMPc7QW1zUfjcMnaloLDas8w/nUv22wJK2C8uefVRbgAnBULEg==
