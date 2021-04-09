@@ -6,7 +6,7 @@
     "dev": "keystone-next dev",
     "start": "keystone-next start",
     "build": "keystone-next build",
-    "postinstall": "keystone-next postinstall"
+    "postinstall": "keystone-next postinstall --fix"
   },
   "dependencies": {
     "@keystone-next/auth": "^20.0.0",
