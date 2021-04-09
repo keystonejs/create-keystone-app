@@ -177,7 +177,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
 async function deleteAllData() {
   const { PrismaClient } = require(path.join(
     projectDir,
-    './.keystone/prisma/generated-client'
+    './node_modules/.prisma/client'
   ));
 
   let prisma = new PrismaClient();
