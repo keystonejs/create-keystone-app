@@ -13,5 +13,8 @@
     "@keystone-next/fields-document": "^4.0.0",
     "@keystone-next/keystone": "^15.0.0",
     "typescript": "^4.2.4"
+  },
+  "scripts": {
+    "postinstall": "keystone-next postinstall"
   }
 }
