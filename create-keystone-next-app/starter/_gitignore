@@ -1,4 +1,3 @@
 node_modules
 .keystone/admin
-.keystone/prisma
 *.log
