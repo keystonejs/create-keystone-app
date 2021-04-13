@@ -14,7 +14,7 @@ const starterDir = path.normalize(`${__dirname}/../starter`);
 const cli = meow(
   `
 Usage
-  $ create-keystone-next-app [directory] --database-url postgres://...
+  $ create-keystone-app [directory] --database-url postgres://...
 Flags
 
   --database-url The Postgres connection string
@@ -42,7 +42,7 @@ async function normalizeArgs(): Promise<Args> {
       type: 'input',
       name: 'directory',
       message:
-        'What directory should create-keystone-next-app generate your app into?',
+        'What directory should create-keystone-app generate your app into?',
       validate: (x) => !!x,
     }));
   }

@@ -1,9 +1,9 @@
 {
-  "name": "create-keystone-next-app-repo",
+  "name": "create-keystone-app-repo",
   "private": true,
   "workspaces": [
-    "create-keystone-next-app",
-    "create-keystone-next-app/starter"
+    "create-keystone-app",
+    "create-keystone-app/starter"
   ],
   "license": "MIT",
   "dependencies": {
@@ -26,7 +26,7 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
-    "postinstall": "preconstruct dev && manypkg check && cd create-keystone-next-app/starter && yarn postinstall",
+    "postinstall": "preconstruct dev && manypkg check && cd create-keystone-app/starter && yarn postinstall",
     "build": "preconstruct build",
     "format": "prettier --write \"**/*.{js,json,ts,tsx,md}\"",
     "lint:prettier": "prettier --list-different \"**/*.{js,json,ts,tsx,md}\"",
@@ -39,7 +39,7 @@
   },
   "preconstruct": {
     "packages": [
-      "create-keystone-next-app"
+      "create-keystone-app"
     ]
   }
 }

@@ -1,4 +1,4 @@
-# create-keystone-next-app
+# create-keystone-app
 
 ## 1.2.1
 
