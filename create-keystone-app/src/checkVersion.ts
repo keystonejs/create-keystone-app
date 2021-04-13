@@ -12,8 +12,9 @@ export async function checkVersion() {
     }
     if (semver.lt(currentPkgJson.version, version)) {
       console.error(
-        `You're running an old version of create-keystone-app, please update to ${version}`
+        `⚠️  You're running an old version of create-keystone-app, please update to ${version}`
       );
+      process.stdout.write('\n'); // add spacing before the next operation
     }
   } catch (err) {
     console.error(

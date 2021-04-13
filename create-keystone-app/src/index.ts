@@ -34,6 +34,24 @@ type Args = {
   databaseUrl: string;
 };
 
+const versionInfo = () => {
+  console.log(`ℹ️  You're about to generate a project using ${c.bold(
+    'Keystone Next'
+  )} packages.
+
+   If you'd like to use ${c.bold(
+     'Keystone 5'
+   )}, please use \`create-keystone-5-app\` instead.
+
+   ${terminalLink(
+     'Learn more',
+     'https://next.keystonejs.com/guides/keystone-5-vs-keystone-next'
+   )} about the changes between ${c.bold('Keystone 5')} and ${c.bold(
+    'Keystone Next'
+  )} on our website.
+  `);
+};
+
 async function normalizeArgs(): Promise<Args> {
   let directory = cli.input[0];
   if (!directory) {
@@ -97,6 +115,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
 };
 
 (async () => {
+  versionInfo();
   await checkVersion();
   const normalizedArgs = await normalizeArgs();
   await fs.mkdir(normalizedArgs.directory);
