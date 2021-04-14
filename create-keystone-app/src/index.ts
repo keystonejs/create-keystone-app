@@ -14,7 +14,7 @@ const starterDir = path.normalize(`${__dirname}/../starter`);
 const cli = meow(
   `
 Usage
-  $ create-keystone-next-app [directory] --database-url postgres://...
+  $ create-keystone-app [directory] --database-url postgres://...
 Flags
 
   --database-url The Postgres connection string
@@ -35,16 +35,20 @@ type Args = {
 };
 
 const versionInfo = () => {
-  process.stdout.write('\n');
-  console.log(`🛑  ${c.bold(`NO LONGER MAINTAINED`)}
+  console.log(`ℹ️  You're about to generate a project using ${c.bold(
+    'Keystone Next'
+  )} packages.
 
-⚠️   This package ${c.bold(
-    `create-keystone-next-app`
-  )} is outdated and no longer maintained.
+   If you'd like to use ${c.bold(
+     'Keystone 5'
+   )}, please use \`create-keystone-5-app\` instead.
 
-👉  Please use ${c.bold(
-    `create-keystone-app`
-  )} instead to generate a new ${c.bold(`Keystone Next`)} project.
+   ${terminalLink(
+     'Learn more',
+     'https://next.keystonejs.com/guides/keystone-5-vs-keystone-next'
+   )} about the changes between ${c.bold('Keystone 5')} and ${c.bold(
+    'Keystone Next'
+  )} on our website.
   `);
 };
 
@@ -56,7 +60,7 @@ async function normalizeArgs(): Promise<Args> {
       type: 'input',
       name: 'directory',
       message:
-        'What directory should create-keystone-next-app generate your app into?',
+        'What directory should create-keystone-app generate your app into?',
       validate: (x) => !!x,
     }));
   }

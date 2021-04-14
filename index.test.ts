@@ -33,7 +33,7 @@ if (process.env.CREATE_PROJECT === 'create project') {
     let createKeystoneAppProcess = promisifiedExecFile(
       'node',
       [
-        require.resolve('./create-keystone-next-app/bin.js'),
+        require.resolve('./create-keystone-app/bin.js'),
         'test-project',
         `--database-url=${process.env.DATABASE_URL}`,
       ],
@@ -53,7 +53,7 @@ if (process.env.CREATE_PROJECT === 'create project') {
   });
 }
 
-let projectDir = path.join(__dirname, 'create-keystone-next-app', 'starter');
+let projectDir = path.join(__dirname, 'create-keystone-app', 'starter');
 
 // the order here is important
 // dev will initialise the database for prod
