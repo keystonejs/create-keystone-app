@@ -34,6 +34,20 @@ type Args = {
   databaseUrl: string;
 };
 
+const versionInfo = () => {
+  process.stdout.write('\n');
+  console.log(`🛑  ${c.bold(`NO LONGER MAINTAINED`)}
+
+⚠️   This package ${c.bold(
+    `create-keystone-next-app`
+  )} is outdated and no longer maintained.
+
+👉  Please use ${c.bold(
+    `create-keystone-app`
+  )} instead to generate a new ${c.bold(`Keystone Next`)} project.
+  `);
+};
+
 async function normalizeArgs(): Promise<Args> {
   let directory = cli.input[0];
   if (!directory) {
@@ -97,6 +111,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
 };
 
 (async () => {
+  versionInfo();
   await checkVersion();
   const normalizedArgs = await normalizeArgs();
   await fs.mkdir(normalizedArgs.directory);
