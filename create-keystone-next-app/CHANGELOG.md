@@ -1,5 +1,11 @@
 # create-keystone-next-app
 
+## 1.2.2
+
+### Patch Changes
+
+- [#66](https://github.com/keystonejs/create-keystone-next-app/pull/66) [`f44867a`](https://github.com/keystonejs/create-keystone-next-app/commit/f44867a56626824e96a2135b2ec1eee07da9fde5) Thanks [@bladey](https://github.com/bladey)! - Added notice to advise users to use `create-keystone-app` instead of `create-keystone-next-app`.
+
 ## 1.2.1
 
 ### Patch Changes
