@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 4.0.0
+
+### Major Changes
+
+- [#65](https://github.com/keystonejs/create-keystone-next-app/pull/65) [`49c5ff2`](https://github.com/keystonejs/create-keystone-next-app/commit/49c5ff2d9892de0692a05a1f1dc01501f2979bc8) Thanks [@bladey](https://github.com/bladey)! - Updated to use Keystone Next packages instead of Keystone 5.
+
 ## 1.2.2
 
 ### Patch Changes
