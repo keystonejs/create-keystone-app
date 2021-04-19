@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "keystone-next dev",
-    "start": "keystone-next start",
+    "postinstall": "keystone-next postinstall",
     "build": "keystone-next build",
-    "postinstall": "keystone-next postinstall"
+    "start": "keystone-next start",
+    "prisma": "keystone-next prisma"
   },
   "dependencies": {
     "@keystone-next/auth": "^20.0.0",
