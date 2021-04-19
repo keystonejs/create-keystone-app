@@ -18,7 +18,7 @@ export const lists = createSchema({
     fields: {
       name: text({ isRequired: true }),
       email: text({ isRequired: true, isUnique: true }),
-      password: password(),
+      password: password({ isRequired: true }),
       posts: relationship({ ref: 'Post.author', many: true }),
     },
   }),
