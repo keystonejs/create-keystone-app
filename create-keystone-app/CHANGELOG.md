@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 4.0.1
+
+### Patch Changes
+
+- [#74](https://github.com/keystonejs/create-keystone-app/pull/74) [`79f19f5`](https://github.com/keystonejs/create-keystone-app/commit/79f19f51a6648941c15ac4f03bc0807a5670cb55) Thanks [@timleslie](https://github.com/timleslie)! - Updated `password` field in starter project to be `{ isRequired: true }`.
+
 ## 4.0.0
 
 ### Major Changes
