@@ -107,8 +107,6 @@ enum SortUsersBy {
   name_DESC
   email_ASC
   email_DESC
-  posts_ASC
-  posts_DESC
 }
 
 input UserUpdateInput {
@@ -253,10 +251,6 @@ enum SortPostsBy {
   status_DESC
   publishDate_ASC
   publishDate_DESC
-  author_ASC
-  author_DESC
-  tags_ASC
-  tags_DESC
 }
 
 input PostUpdateInput {
@@ -365,8 +359,6 @@ enum SortTagsBy {
   id_DESC
   name_ASC
   name_DESC
-  posts_ASC
-  posts_DESC
 }
 
 input TagUpdateInput {
