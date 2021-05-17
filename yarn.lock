@@ -1801,7 +1801,7 @@
     p-settle "^4.1.1"
     react "^17.0.2"
 
-"@keystone-next/keystone@^17.1.1", "@keystone-next/keystone@^17.2.0":
+"@keystone-next/keystone@^17.2.0":
   version "17.2.0"
   resolved "https://registry.yarnpkg.com/@keystone-next/keystone/-/keystone-17.2.0.tgz#91cad8e83297bd0c2c4bb9243daca1477acab3f6"
   integrity sha512-/zpr2bO05uBc13gaeD7n8xhxEGqhgecbkuQbe1sLgI5TQNgMggL+mCvg6BiTZfYJDbvzJh/Oqa0Ts6xubWK/kQ==
