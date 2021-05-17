@@ -9,7 +9,7 @@
     "postinstall": "keystone-next postinstall"
   },
   "dependencies": {
-    "@keystone-next/auth": "^23.0.1",
+    "@keystone-next/auth": "^24.0.0",
     "@keystone-next/fields": "^8.2.0",
     "@keystone-next/fields-document": "^5.0.2",
     "@keystone-next/keystone": "^17.2.0",
