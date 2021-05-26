@@ -23,7 +23,7 @@
     "prettier": "^2.3.0",
     "tempy": "^1.0.1",
     "tree-kill": "^1.2.2",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.2"
   },
   "scripts": {
     "postinstall": "preconstruct dev && manypkg check && cd create-keystone-app/starter && yarn postinstall",
