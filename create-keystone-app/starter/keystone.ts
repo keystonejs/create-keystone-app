@@ -18,7 +18,7 @@ if (!sessionSecret) {
 
 let sessionMaxAge = 60 * 60 * 24 * 30; // 30 days
 
-const auth = createAuth({
+const { withAuth } = createAuth({
   listKey: 'User',
   identityField: 'email',
   secretField: 'password',
@@ -33,7 +33,7 @@ const session = statelessSessions({
   secret: sessionSecret,
 });
 
-export default auth.withAuth(
+export default withAuth(
   config({
     db: {
       adapter: 'prisma_postgresql',
