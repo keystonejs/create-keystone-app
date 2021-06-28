@@ -1,6 +1,6 @@
 {
   "name": "create-keystone-app",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "main": "dist/create-keystone-app.cjs.js",
   "files": [
     "dist",
