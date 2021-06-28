@@ -1,6 +1,6 @@
 {
   "name": "create-keystone-app",
-  "version": "4.0.2",
+  "version": "4.0.6",
   "main": "dist/create-keystone-app.cjs.js",
   "files": [
     "dist",
@@ -11,13 +11,13 @@
   "bin": "./bin.js",
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.14.0",
+    "@babel/runtime": "^7.14.6",
     "chalk": "^4.1.1",
     "enquirer": "^2.3.6",
-    "execa": "^5.0.0",
+    "execa": "^5.1.1",
     "fs-extra": "^10.0.0",
     "meow": "^9.0.0",
-    "ora": "^5.4.0",
+    "ora": "^5.4.1",
     "package-json": "^6.5.0",
     "semver": "^7.3.5",
     "terminal-link": "^2.1.1"

@@ -1,10 +1,3 @@
-input PostRelateToManyInput {
-  create: [PostCreateInput]
-  connect: [PostWhereUniqueInput]
-  disconnect: [PostWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
 """
  A keystone list
 """
@@ -12,28 +5,42 @@ type User {
   id: ID!
   name: String
   email: String
-  password_is_set: Boolean
+  password: PasswordState
   posts(
-    where: PostWhereInput
+    where: PostWhereInput! = {}
     search: String
     sortBy: [SortPostsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [PostOrderByInput!]! = []
     first: Int
-    skip: Int
-  ): [Post!]!
+    skip: Int! = 0
+  ): [Post!]
   _postsMeta(
-    where: PostWhereInput
+    where: PostWhereInput! = {}
     search: String
     sortBy: [SortPostsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [PostOrderByInput!]! = []
     first: Int
-    skip: Int
+    skip: Int! = 0
   ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use postsCount instead."
+    )
+  postsCount(where: PostWhereInput! = {}): Int
+}
+
+type PasswordState {
+  isSet: Boolean!
+}
+
+type _QueryMeta {
+  count: Int
 }
 
 input UserWhereInput {
-  AND: [UserWhereInput]
-  OR: [UserWhereInput]
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
   id: ID
   id_not: ID
   id_lt: ID
@@ -97,7 +104,8 @@ input UserWhereInput {
 }
 
 input UserWhereUniqueInput {
-  id: ID!
+  id: ID
+  email: String
 }
 
 enum SortUsersBy {
@@ -109,11 +117,29 @@ enum SortUsersBy {
   email_DESC
 }
 
+input UserOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  email: OrderDirection
+}
+
+enum OrderDirection {
+  asc
+  desc
+}
+
 input UserUpdateInput {
   name: String
   email: String
   password: String
   posts: PostRelateToManyInput
+}
+
+input PostRelateToManyInput {
+  create: [PostCreateInput]
+  connect: [PostWhereUniqueInput]
+  disconnect: [PostWhereUniqueInput]
+  disconnectAll: Boolean
 }
 
 input UsersUpdateInput {
@@ -132,24 +158,6 @@ input UsersCreateInput {
   data: UserCreateInput
 }
 
-type Post_content_DocumentField {
-  document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-input UserRelateToOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: UserWhereUniqueInput
-  disconnectAll: Boolean
-}
-
-input TagRelateToManyInput {
-  create: [TagCreateInput]
-  connect: [TagWhereUniqueInput]
-  disconnect: [TagWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
 """
  A keystone list
 """
@@ -161,26 +169,36 @@ type Post {
   publishDate: String
   author: User
   tags(
-    where: TagWhereInput
+    where: TagWhereInput! = {}
     search: String
     sortBy: [SortTagsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [TagOrderByInput!]! = []
     first: Int
-    skip: Int
-  ): [Tag!]!
+    skip: Int! = 0
+  ): [Tag!]
   _tagsMeta(
-    where: TagWhereInput
+    where: TagWhereInput! = {}
     search: String
     sortBy: [SortTagsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [TagOrderByInput!]! = []
     first: Int
-    skip: Int
+    skip: Int! = 0
   ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use tagsCount instead."
+    )
+  tagsCount(where: TagWhereInput! = {}): Int
+}
+
+type Post_content_DocumentField {
+  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 input PostWhereInput {
-  AND: [PostWhereInput]
-  OR: [PostWhereInput]
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
   id: ID
   id_not: ID
   id_lt: ID
@@ -239,7 +257,7 @@ input PostWhereInput {
 }
 
 input PostWhereUniqueInput {
-  id: ID!
+  id: ID
 }
 
 enum SortPostsBy {
@@ -253,6 +271,13 @@ enum SortPostsBy {
   publishDate_DESC
 }
 
+input PostOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  status: OrderDirection
+  publishDate: OrderDirection
+}
+
 input PostUpdateInput {
   title: String
   status: String
@@ -260,6 +285,20 @@ input PostUpdateInput {
   publishDate: String
   author: UserRelateToOneInput
   tags: TagRelateToManyInput
+}
+
+input UserRelateToOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: UserWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input TagRelateToManyInput {
+  create: [TagCreateInput]
+  connect: [TagWhereUniqueInput]
+  disconnect: [TagWhereUniqueInput]
+  disconnectAll: Boolean
 }
 
 input PostsUpdateInput {
@@ -287,26 +326,32 @@ type Tag {
   id: ID!
   name: String
   posts(
-    where: PostWhereInput
+    where: PostWhereInput! = {}
     search: String
     sortBy: [SortPostsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [PostOrderByInput!]! = []
     first: Int
-    skip: Int
-  ): [Post!]!
+    skip: Int! = 0
+  ): [Post!]
   _postsMeta(
-    where: PostWhereInput
+    where: PostWhereInput! = {}
     search: String
     sortBy: [SortPostsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [PostOrderByInput!]! = []
     first: Int
-    skip: Int
+    skip: Int! = 0
   ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use postsCount instead."
+    )
+  postsCount(where: PostWhereInput! = {}): Int
 }
 
 input TagWhereInput {
-  AND: [TagWhereInput]
-  OR: [TagWhereInput]
+  AND: [TagWhereInput!]
+  OR: [TagWhereInput!]
   id: ID
   id_not: ID
   id_lt: ID
@@ -351,7 +396,7 @@ input TagWhereInput {
 }
 
 input TagWhereUniqueInput {
-  id: ID!
+  id: ID
 }
 
 enum SortTagsBy {
@@ -359,6 +404,11 @@ enum SortTagsBy {
   id_DESC
   name_ASC
   name_DESC
+}
+
+input TagOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
 }
 
 input TagUpdateInput {
@@ -387,10 +437,6 @@ scalar JSON
   @specifiedBy(
     url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"
   )
-
-type _QueryMeta {
-  count: Int
-}
 
 type Mutation {
   """
@@ -492,11 +538,6 @@ type Mutation {
   endSession: Boolean!
 }
 
-"""
-The `Upload` scalar type represents a file upload.
-"""
-scalar Upload
-
 union AuthenticatedItem = User
 
 union UserAuthenticationWithPasswordResult =
@@ -532,13 +573,14 @@ type Query {
    Search for all User items which match the where clause.
   """
   allUsers(
-    where: UserWhereInput
+    where: UserWhereInput! = {}
     search: String
     sortBy: [SortUsersBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [UserOrderByInput!]! = []
     first: Int
-    skip: Int
-  ): [User]
+    skip: Int! = 0
+  ): [User!]
 
   """
    Search for the User item with the matching ID.
@@ -549,25 +591,31 @@ type Query {
    Perform a meta-query on all User items which match the where clause.
   """
   _allUsersMeta(
-    where: UserWhereInput
+    where: UserWhereInput! = {}
     search: String
     sortBy: [SortUsersBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [UserOrderByInput!]! = []
     first: Int
-    skip: Int
+    skip: Int! = 0
   ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use usersCount instead."
+    )
+  usersCount(where: UserWhereInput! = {}): Int
 
   """
    Search for all Post items which match the where clause.
   """
   allPosts(
-    where: PostWhereInput
+    where: PostWhereInput! = {}
     search: String
     sortBy: [SortPostsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [PostOrderByInput!]! = []
     first: Int
-    skip: Int
-  ): [Post]
+    skip: Int! = 0
+  ): [Post!]
 
   """
    Search for the Post item with the matching ID.
@@ -578,25 +626,31 @@ type Query {
    Perform a meta-query on all Post items which match the where clause.
   """
   _allPostsMeta(
-    where: PostWhereInput
+    where: PostWhereInput! = {}
     search: String
     sortBy: [SortPostsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [PostOrderByInput!]! = []
     first: Int
-    skip: Int
+    skip: Int! = 0
   ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use postsCount instead."
+    )
+  postsCount(where: PostWhereInput! = {}): Int
 
   """
    Search for all Tag items which match the where clause.
   """
   allTags(
-    where: TagWhereInput
+    where: TagWhereInput! = {}
     search: String
     sortBy: [SortTagsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [TagOrderByInput!]! = []
     first: Int
-    skip: Int
-  ): [Tag]
+    skip: Int! = 0
+  ): [Tag!]
 
   """
    Search for the Tag item with the matching ID.
@@ -607,13 +661,18 @@ type Query {
    Perform a meta-query on all Tag items which match the where clause.
   """
   _allTagsMeta(
-    where: TagWhereInput
+    where: TagWhereInput! = {}
     search: String
     sortBy: [SortTagsBy!]
-    orderBy: String
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [TagOrderByInput!]! = []
     first: Int
-    skip: Int
+    skip: Int! = 0
   ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use tagsCount instead."
+    )
+  tagsCount(where: TagWhereInput! = {}): Int
   authenticatedItem: AuthenticatedItem
   keystone: KeystoneMeta!
 }

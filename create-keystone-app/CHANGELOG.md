@@ -1,5 +1,29 @@
 # create-keystone-app
 
+## 4.0.6
+
+### Patch Changes
+
+- [#122](https://github.com/keystonejs/create-keystone-app/pull/122) [`60f1454`](https://github.com/keystonejs/create-keystone-app/commit/60f1454e354f37a587a75d7cb54c165862fc392d) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies to latest version.
+
+## 4.0.5
+
+### Patch Changes
+
+- [#116](https://github.com/keystonejs/create-keystone-app/pull/116) [`d532c8f`](https://github.com/keystonejs/create-keystone-app/commit/d532c8fcc243fd4d37d45a47eb4a1c7698fca494) Thanks [@bladey](https://github.com/bladey)! - Updated Keystone dependencies to latest version.
+
+## 4.0.4
+
+### Patch Changes
+
+- [#101](https://github.com/keystonejs/create-keystone-app/pull/101) [`446bf0e`](https://github.com/keystonejs/create-keystone-app/commit/446bf0e745e30d814a438c81eb8f7dd275174ff9) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies to latest version.
+
+## 4.0.3
+
+### Patch Changes
+
+- [#97](https://github.com/keystonejs/create-keystone-app/pull/97) [`4e47f27`](https://github.com/keystonejs/create-keystone-app/commit/4e47f27aa9f5925b6346960ee080758c8bfe34df) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies to latest version.
+
 ## 4.0.2
 
 ### Patch Changes
