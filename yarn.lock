@@ -1666,7 +1666,7 @@
     fast-deep-equal "^3.1.3"
     graphql "^15.5.1"
 
-"@keystone-next/fields-document@^7.0.0":
+"@keystone-next/fields-document@^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@keystone-next/fields-document/-/fields-document-7.0.1.tgz#4a3bc575e2e7f28566348efb0f26504c9d06d0a3"
   integrity sha512-OtcJSWscW5eWk61qNblKcQ3usCcAW2ktmrR5eZsLSFiPEwAKgv6XfjMtHTgkjYlST9oz9HmdGH5h1HV1SHxv2A==
@@ -1704,7 +1704,7 @@
     slate-history "^0.60.4"
     slate-react "^0.60.4"
 
-"@keystone-next/fields@^11.0.1", "@keystone-next/fields@^11.0.2":
+"@keystone-next/fields@^11.0.2":
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/@keystone-next/fields/-/fields-11.0.2.tgz#d81a459dc63bc06ec180737460b1305b72e74899"
   integrity sha512-lwk0ibPdlKnQFSgUueLu6DQ1QfrXv8DcEo7vCIuFymoeLTU2kM5xIWPAIcuwVT28ohcTMkOjCfEubphBZd2oQQ==
