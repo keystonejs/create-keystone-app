@@ -1,6 +1,6 @@
 {
   "name": "keystone-app",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "private": true,
   "scripts": {
     "dev": "keystone-next dev",
