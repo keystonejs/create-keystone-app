@@ -4,3 +4,5 @@
 ---
 
 Updated Keystone dependencies to latest version.
+
+Updated README with getting starting instructions.
