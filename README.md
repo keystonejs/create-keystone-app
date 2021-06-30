@@ -1,6 +1,6 @@
 # create-keystone-app
 
-This starter-kit will get you up and running with a new [Keystone](https://next.keystonejs.com) project in just a few minutes. Run one of the following commands to get started.
+This starter-kit will get you up and running with a new [Keystone](https://keystonejs.com) project in just a few minutes. Run one of the following commands to get started.
 
 ```
 yarn create keystone-app
@@ -18,7 +18,7 @@ or
 npx create-keystone-app
 ```
 
-See the [Keystone website](https://next.keystonejs.com/docs/walkthroughs/getting-started-with-create-keystone-app) for more details on how to get started with Keystone.
+See the [Keystone website](https://keystonejs.com/docs/walkthroughs/getting-started-with-create-keystone-app) for more details on how to get started with Keystone.
 
 ## FAQ
 
