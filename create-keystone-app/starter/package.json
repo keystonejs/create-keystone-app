@@ -13,6 +13,6 @@
     "@keystone-next/fields": "^11.0.2",
     "@keystone-next/fields-document": "^7.0.1",
     "@keystone-next/keystone": "^21.0.1",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.5"
   }
 }
