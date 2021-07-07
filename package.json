@@ -16,7 +16,7 @@
     "@changesets/cli": "^2.16.0",
     "@manypkg/cli": "^0.18.0",
     "@preconstruct/cli": "^2.1.0",
-    "@types/fs-extra": "^9.0.11",
+    "@types/fs-extra": "^9.0.12",
     "@types/jest": "^26.0.24",
     "jest": "^27.0.6",
     "playwright": "^1.12.3",
