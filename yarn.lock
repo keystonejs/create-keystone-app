@@ -1675,7 +1675,7 @@
     fast-deep-equal "^3.1.3"
     graphql "^15.5.1"
 
-"@keystone-next/fields-document@^7.0.2":
+"@keystone-next/fields-document@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@keystone-next/fields-document/-/fields-document-7.0.3.tgz#a9e5820aa94d1a66f3bf4646aecc8d5bacac36f2"
   integrity sha512-EesAsM8sZPnIXjmb8WidjmnZBj5brLyOKOTzlZ5d8uRvKGfwqIueDmKfg6NEDKQmvMk8f074Oya2k571BKyZQQ==
