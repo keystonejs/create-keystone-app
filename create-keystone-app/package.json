@@ -1,6 +1,6 @@
 {
   "name": "create-keystone-app",
-  "version": "4.0.8",
+  "version": "4.0.10",
   "main": "dist/create-keystone-app.cjs.js",
   "files": [
     "dist",
@@ -11,8 +11,8 @@
   "bin": "./bin.js",
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.14.6",
-    "chalk": "^4.1.1",
+    "@babel/runtime": "^7.14.8",
+    "chalk": "^4.1.2",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
     "fs-extra": "^10.0.0",
