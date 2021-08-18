@@ -1,5 +1,11 @@
 # keystone-next-app
 
+## 2.0.12
+
+### Patch Changes
+
+- [#173](https://github.com/keystonejs/create-keystone-app/pull/173) [`b8cf267`](https://github.com/keystonejs/create-keystone-app/commit/b8cf26719456a0c88788f6d6ea3fec05af2b57a6) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies to latest version.
+
 ## 2.0.11
 
 ### Patch Changes
