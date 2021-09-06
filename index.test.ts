@@ -73,7 +73,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
     let listener = (chunk: any) => {
       let stringified = chunk.toString('utf8');
       console.log(stringified);
-      if (stringified.includes('API ready')) {
+      if (stringified.includes('Admin UI ready')) {
         adminUIReady.resolve();
       }
     };
