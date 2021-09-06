@@ -94,7 +94,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     await execa('yarn', ['install'], { cwd });
     spinner.succeed('Installed dependencies with yarn.');
     return 'yarn';
-  } catch (_err) {
+  } catch (_err: any) {
     let err: ExecaError = _err;
     if (err.failed) {
       spinner.warn('Failed to install with yarn.');
