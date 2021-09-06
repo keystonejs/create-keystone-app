@@ -1664,9 +1664,9 @@
     slate-react "^0.60.4"
 
 "@keystone-next/keystone@^25.0.0":
-  version "25.0.0"
-  resolved "https://registry.yarnpkg.com/@keystone-next/keystone/-/keystone-25.0.0.tgz#49ea7b1d41c177e14448dad5cf8fa57bd4305fcb"
-  integrity sha512-hbyxQ6h7imJD3WaT94r6KBA7EvxjRJLPivi7aLMjZVH8gGhk6WUyX5Gs+j7T+MQeeLVcTspBQf7+sycaJfIH7Q==
+  version "25.0.1"
+  resolved "https://registry.yarnpkg.com/@keystone-next/keystone/-/keystone-25.0.1.tgz#5c6ea8f669a714ebabfd5d8c87a1d7fa7be57566"
+  integrity sha512-BgWrTlVulP0NAXJPOcwrL+x184h9I6niECAoxnCIYiVYurY8G5HqA9degn33oixJVV5eBayma08tq6o5achGZA==
   dependencies:
     "@apollo/client" "^3.4.10"
     "@babel/core" "^7.15.0"
