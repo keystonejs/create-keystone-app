@@ -45,7 +45,7 @@ const versionInfo = () => {
 
    ${terminalLink(
      'Learn more',
-     'https://next.keystonejs.com/guides/keystone-5-vs-keystone-next'
+     'https://keystonejs.com/guides/keystone-5-vs-keystone-next'
    )} about the changes between ${c.bold('Keystone 5')} and ${c.bold(
     'Keystone Next'
   )} on our website.
