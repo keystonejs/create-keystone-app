@@ -1,11 +1,11 @@
-import { createSchema, list } from '@keystone-next/keystone/schema';
+import { createSchema, list } from '@keystone-next/keystone';
 import {
   text,
   relationship,
   password,
   timestamp,
   select,
-} from '@keystone-next/fields';
+} from '@keystone-next/keystone/fields';
 import { document } from '@keystone-next/fields-document';
 
 export const lists = createSchema({
@@ -17,7 +17,11 @@ export const lists = createSchema({
     },
     fields: {
       name: text({ isRequired: true }),
-      email: text({ isRequired: true, isUnique: true }),
+      email: text({
+        isRequired: true,
+        isIndexed: 'unique',
+        isFilterable: true,
+      }),
       password: password({ isRequired: true }),
       posts: relationship({ ref: 'Post.author', many: true }),
     },

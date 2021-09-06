@@ -45,7 +45,7 @@ const versionInfo = () => {
 
    ${terminalLink(
      'Learn more',
-     'https://next.keystonejs.com/guides/keystone-5-vs-keystone-next'
+     'https://keystonejs.com/guides/keystone-5-vs-keystone-next'
    )} about the changes between ${c.bold('Keystone 5')} and ${c.bold(
     'Keystone Next'
   )} on our website.
@@ -94,7 +94,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     await execa('yarn', ['install'], { cwd });
     spinner.succeed('Installed dependencies with yarn.');
     return 'yarn';
-  } catch (_err) {
+  } catch (_err: any) {
     let err: ExecaError = _err;
     if (err.failed) {
       spinner.warn('Failed to install with yarn.');
