@@ -73,7 +73,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
     let listener = (chunk: any) => {
       let stringified = chunk.toString('utf8');
       console.log(stringified);
-      if (stringified.includes('API ready')) {
+      if (stringified.includes('Admin UI ready')) {
         adminUIReady.resolve();
       }
     };
@@ -83,7 +83,9 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       keystoneProcess.stdout!.off('data', listener);
       // childProcess.kill will only kill the direct child process
       // so we use tree-kill to kill the process and it's children
-      await treeKill(keystoneProcess.pid);
+      if (keystoneProcess.pid) {
+        await treeKill(keystoneProcess.pid);
+      }
     };
 
     await adminUIReady;
