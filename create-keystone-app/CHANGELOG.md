@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 4.0.15
+
+### Patch Changes
+
+- [#199](https://github.com/keystonejs/create-keystone-app/pull/199) [`fe7523d`](https://github.com/keystonejs/create-keystone-app/commit/fe7523dc1ee04d46a7d506554418fd3812729b46) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies to latest version.
+
 ## 4.0.14
 
 ### Patch Changes
