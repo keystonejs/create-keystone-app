@@ -8,6 +8,7 @@ import { checkVersion } from './checkVersion';
 import { UserError } from './utils';
 import c from 'chalk';
 import terminalLink from 'terminal-link';
+import { sendTelemetryEvent } from './telemetry';
 
 const starterDir = path.normalize(`${__dirname}/../starter`);
 
@@ -42,6 +43,7 @@ async function normalizeArgs(): Promise<Args> {
     }));
     process.stdout.write('\n');
   }
+  sendTelemetryEvent('create-keystone-app-start', 'development', directory);
   return {
     directory: path.resolve(directory),
   };
@@ -131,6 +133,11 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     'https://github.com/keystonejs/keystone'
   )}
 `);
+  sendTelemetryEvent(
+    'create-keystone-app-complete',
+    'development',
+    normalizedArgs.directory
+  );
 })().catch((err) => {
   if (err instanceof UserError) {
     console.error(err.message);
