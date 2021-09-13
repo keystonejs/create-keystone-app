@@ -8,6 +8,7 @@ import { checkVersion } from './checkVersion';
 import { UserError } from './utils';
 import c from 'chalk';
 import terminalLink from 'terminal-link';
+import { sendTelemetryEvent } from './telemetry';
 
 const starterDir = path.normalize(`${__dirname}/../starter`);
 
@@ -24,6 +25,9 @@ Flags
     flags: {
       databaseUrl: {
         type: 'string',
+      },
+      telemetryDisabled: {
+        type: 'boolean',
       },
     },
   }
@@ -64,6 +68,14 @@ async function normalizeArgs(): Promise<Args> {
       validate: (x) => !!x,
     }));
   }
+  const directoryPath = path.resolve(directory);
+
+  if (cli.flags.telemetryDisabled) {
+    process.env.TELEMETRY_DISABLED = 'true';
+  }
+
+  sendTelemetryEvent('create-keystone-app-start', 'development', directoryPath);
+
   let databaseUrl = cli.flags.databaseUrl;
   if (databaseUrl && !databaseUrl.startsWith('postgres://')) {
     throw new UserError('The database url must be start with postgres://');
@@ -81,7 +93,7 @@ async function normalizeArgs(): Promise<Args> {
   }
 
   return {
-    directory: path.resolve(directory),
+    directory: directoryPath,
     databaseUrl,
   };
 }
@@ -174,6 +186,11 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     'https://github.com/keystonejs/keystone'
   )}
 `);
+  sendTelemetryEvent(
+    'create-keystone-app-complete',
+    'development',
+    normalizedArgs.directory
+  );
 })().catch((err) => {
   if (err instanceof UserError) {
     console.error(err.message);
