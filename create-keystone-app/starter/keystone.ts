@@ -14,8 +14,8 @@ const session = statelessSessions({
 export default withAuth(
   config({
     db: {
-      adapter: 'prisma_postgresql',
-      url: process.env.DATABASE_URL || 'DATABASE_URL_TO_REPLACE',
+      provider: 'sqlite',
+      url: 'file:./keystone.db',
     },
     ui: {
       isAccessAllowed: (context) => !!context.session?.data,

@@ -104,6 +104,7 @@ dist
 .tern-port
 
 .keystone
+keystone.db
 
 # OS files
 .DS_Store
