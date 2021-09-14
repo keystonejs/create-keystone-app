@@ -14,24 +14,12 @@ const starterDir = path.normalize(`${__dirname}/../starter`);
 const cli = meow(
   `
 Usage
-  $ create-keystone-app [directory] --database-url postgres://...
-Flags
-
-  --database-url The Postgres connection string
-
-`,
-  {
-    flags: {
-      databaseUrl: {
-        type: 'string',
-      },
-    },
-  }
+  $ create-keystone-app [directory]
+`
 );
 
 type Args = {
   directory: string;
-  databaseUrl: string;
 };
 
 const versionInfo = () => {
@@ -64,25 +52,8 @@ async function normalizeArgs(): Promise<Args> {
       validate: (x) => !!x,
     }));
   }
-  let databaseUrl = cli.flags.databaseUrl;
-  if (databaseUrl && !databaseUrl.startsWith('postgres://')) {
-    throw new UserError('The database url must be start with postgres://');
-  }
-  if (!databaseUrl) {
-    ({ databaseUrl } = await enquirer.prompt<{ databaseUrl: string }>({
-      type: 'input',
-      name: 'databaseUrl',
-      message: 'What database url should we use?',
-      validate: (x) =>
-        x.startsWith('postgres://')
-          ? true
-          : 'The database url must start with postgres://',
-    }));
-  }
-
   return {
     directory: path.resolve(directory),
-    databaseUrl,
   };
 }
 
@@ -127,26 +98,15 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
       'tsconfig.json',
       'schema.graphql',
       'schema.prisma',
+      'keystone.ts',
+      'auth.ts',
+      'README.md',
     ].map((filename) =>
       fs.copyFile(
         path.join(starterDir, filename),
         path.join(normalizedArgs.directory, filename.replace(/^_/, '.'))
       )
     ),
-    (async () => {
-      let keystoneTsContents = await fs.readFile(
-        path.join(starterDir, 'keystone.ts'),
-        'utf8'
-      );
-      keystoneTsContents = keystoneTsContents.replace(
-        'DATABASE_URL_TO_REPLACE',
-        `${normalizedArgs.databaseUrl}`
-      );
-      await fs.writeFile(
-        path.join(normalizedArgs.directory, 'keystone.ts'),
-        keystoneTsContents
-      );
-    })(),
   ]);
   const packageManager = await installDeps(normalizedArgs.directory);
   const relativeProjectDir = path.relative(
@@ -168,6 +128,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     `${relativeProjectDir}${path.sep}keystone.ts`
   )} to customize your app.
   - ${terminalLink('Open the Admin UI', 'http://localhost:3000')}
+  - ${terminalLink('Open the Graphql API', 'http://localhost:3000/api/graphql')}
   - ${terminalLink('Read the docs', 'https://next.keystonejs.com')}
   - ${terminalLink(
     'Star Keystone on GitHub',
