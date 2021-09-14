@@ -1,4 +1,4 @@
-# Keystone Project Parter
+# Keystone Project Starter
 
 Welcome to Keystone!
 
@@ -14,7 +14,7 @@ This project starter is designed to give you a sense of the power Keystone can o
 
 We recommend you use this alongside our [getting started walkthrough](https://keystonejs.com/docs/walkthroughs/getting-started-with-create-keystone-app) which will walk you through what you get as part of this starter.
 
-If you want an overview of all the features Keystone offers, check out our [why Keystone](https://keystonejs.com/why-keystone) page.
+If you want an overview of all the features Keystone offers, check out our [features](https://keystonejs.com/why-keystone#features) page.
 
 ## Some Quick Notes On Getting Started
 
@@ -31,20 +31,22 @@ db: {
 }
 ```
 
+And provide your database url from postgres.
+
 For more on database configuration, check out or [db api docs](https://keystonejs.com/docs/apis/config#db)
 
 ### Auth
 
-We have put auth into its own file to make this humble codebase easier to navigate. If you want to just browse without auth turned on, you can comment out the `isAccessAllowed` on line 21 of the Keystone file [./keystone.ts](./keystone.ts) if you want to explore the setup and admin UI without worrying about auth right now.
+We've put auth into its own file to make this humble starter easier to navigate. To explore it without auth turned on, comment out the `isAccessAllowed` on line 21 of the keystone file [./keystone.ts](./keystone.ts).
 
 For more on auth, check out our [authentication API docs](https://keystonejs.com/docs/apis/auth#authentication-api)
 
 ### Adding a frontend
 
-Keystone is frontend agnostic, and provides a graphql endpoint you can write queries against at `/api/graphql` (by default [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql)). At Thinkmill, we tend to use [Next.js](https://nextjs.org/) and [Apollo graphql](https://www.apollographql.com/docs/react/get-started/) as our frontend and way to write queries, but if you have your own favourite, feel free to pick that up.
+As a Headless CMS, Keystone can be used with any frontend that uses GraphQL. It provides a GraphQL endpoint you can write queries against at `/api/graphql` (by default [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql)). At Thinkmill, we tend to use [Next.js](https://nextjs.org/) and [Apollo graphql](https://www.apollographql.com/docs/react/get-started/) as our frontend and way to write queries, but if you have your own favourite, feel free to use it.
 
 A walkthrough on how to do this is forthcoming, but in the meantime our [todo example](https://github.com/keystonejs/keystone-react-todo-demo) shows a Keystone set up with a frontend. For a more full example, you can also look at an example app we built for [Prisma Day 2021](https://github.com/keystonejs/prisma-day-2021-workshop)
 
-### Next embedded keystone
+### Embedding Keystone in a Next.js frontend
 
 While Keystone works as a standalone app, you can embed your Keystone app into a [Next.js](https://nextjs.org/) app. This is quite a different setup to the starter, and we recommend checking out our walkthrough for that [here](https://keystonejs.com/docs/walkthroughs/embedded-mode-with-sqlite-nextjs#how-to-embed-keystone-sq-lite-in-a-next-js-app).
