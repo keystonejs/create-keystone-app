@@ -12,6 +12,6 @@
     "@keystone-next/auth": "^32.0.0",
     "@keystone-next/fields-document": "^9.0.0",
     "@keystone-next/keystone": "^25.0.3",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.3"
   }
 }
