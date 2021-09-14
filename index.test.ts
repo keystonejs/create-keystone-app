@@ -32,11 +32,7 @@ if (process.env.CREATE_PROJECT === 'create project') {
     const cwd = tempy.directory();
     let createKeystoneAppProcess = promisifiedExecFile(
       'node',
-      [
-        require.resolve('./create-keystone-app/bin.js'),
-        'test-project',
-        `--database-url=${process.env.DATABASE_URL}`,
-      ],
+      [require.resolve('./create-keystone-app/bin.js'), 'test-project'],
       { cwd }
     );
     createKeystoneAppProcess.child.stdout!.on('data', (chunk) => {
@@ -157,7 +153,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
 
       test('create post', async () => {
         await Promise.all([
-          page.waitForNavigation(),
+          page.waitForNavigation({ timeout: 60000 }),
           page.click('nav >> text=Posts'),
         ]);
         await page.click('button:has-text("Create Post")');
