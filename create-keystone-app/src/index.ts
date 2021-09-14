@@ -99,8 +99,8 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
       'schema.graphql',
       'schema.prisma',
       'keystone.ts',
-      'README.md',
       'auth.ts',
+      'README.md',
     ].map((filename) =>
       fs.copyFile(
         path.join(starterDir, filename),
