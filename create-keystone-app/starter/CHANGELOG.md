@@ -1,5 +1,11 @@
 # keystone-next-app
 
+## 3.0.0
+
+### Major Changes
+
+- [#201](https://github.com/keystonejs/create-keystone-app/pull/201) [`ee98fdb`](https://github.com/keystonejs/create-keystone-app/commit/ee98fdba87ee303e47790aa146575316de299fb6) Thanks [@Noviny](https://github.com/Noviny)! - Switch to use sqlite as the default database
+
 ## 2.0.14
 
 ### Patch Changes
