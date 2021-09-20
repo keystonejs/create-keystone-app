@@ -113,13 +113,7 @@ input StringNullableFilter {
   contains: String
   startsWith: String
   endsWith: String
-  mode: QueryMode
   not: NestedStringNullableFilter
-}
-
-enum QueryMode {
-  default
-  insensitive
 }
 
 input NestedStringNullableFilter {
@@ -406,6 +400,11 @@ enum KeystoneAdminUIFieldMetaItemViewFieldMode {
   edit
   read
   hidden
+}
+
+enum QueryMode {
+  default
+  insensitive
 }
 
 type KeystoneAdminUISort {
