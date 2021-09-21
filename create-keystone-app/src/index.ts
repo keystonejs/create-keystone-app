@@ -43,7 +43,7 @@ async function normalizeArgs(): Promise<Args> {
     }));
     process.stdout.write('\n');
   }
-  sendTelemetryEvent('create-keystone-app-start', 'development', directory);
+  sendTelemetryEvent('create-keystone-app-start', directory);
   return {
     directory: path.resolve(directory),
   };
@@ -133,11 +133,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
     'https://github.com/keystonejs/keystone'
   )}
 `);
-  sendTelemetryEvent(
-    'create-keystone-app-complete',
-    'development',
-    normalizedArgs.directory
-  );
+  sendTelemetryEvent('create-keystone-app-complete', normalizedArgs.directory);
 })().catch((err) => {
   if (err instanceof UserError) {
     console.error(err.message);
