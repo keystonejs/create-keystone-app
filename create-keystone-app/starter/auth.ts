@@ -1,13 +1,14 @@
 /*
-Welcome to the auth file! Here we have put a config to do basic auth in keystone.
+Welcome to the auth file! Here we have put a config to do basic auth in Keystone.
 
-createAuth is an easy implementation for an email-password login out of the box.
-statelessSessions is a simple implementation of session logic
+`createAuth` is an implementation for an email-password login out of the box.
+`statelessSessions` is a base implementation of session logic.
 
 For more on auth, check out: https://keystonejs.com/docs/apis/auth#authentication-api
 */
 
 import { createAuth } from '@keystone-next/auth';
+
 // See https://keystonejs.com/docs/apis/session#session-api for the session docs
 import { statelessSessions } from '@keystone-next/keystone/session';
 
@@ -32,7 +33,6 @@ const { withAuth } = createAuth({
   listKey: 'User',
   identityField: 'email',
   secretField: 'password',
-  sessionData: 'name',
   initFirstItem: {
     // If there are no items in the database, keystone will ask you to create
     // a new user, filling in these fields.

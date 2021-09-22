@@ -1,8 +1,8 @@
 /*
-Welcome to the schema! The schema is the lifeblood of keystone.
+Welcome to the schema! The schema is the heart of Keystone.
 
-Here we define our 'lists', which will then be used both for the graphql
-API definition, our database tables, and our admin UI layout.
+Here we define our 'lists', which will then be used both for the GraphQL
+API definition, our database tables, and our Admin UI layout.
 
 Some quick definitions to help out:
 A list: A definition of a collection of fields with a name. For the starter
@@ -10,14 +10,13 @@ A list: A definition of a collection of fields with a name. For the starter
 A field: The individual bits of data on your list, each with its own type.
   you can see some of the lists in what we use below.
 
-## For this app
-We have 
 */
 
 // Like the `config` function we use in keystone.ts, we use functions
 // for putting in our config so we get useful errors. With typescript,
 // we get these even before code runs.
 import { createSchema, list } from '@keystone-next/keystone';
+
 // We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
 import {
@@ -32,17 +31,12 @@ import {
 // custom ones.
 import { document } from '@keystone-next/fields-document';
 
-// Each property on the object passed in to `createSchema` will become a
-// list in keystone.
-export const lists = createSchema({
+// We have a users list, a blogs list, and tags for blog posts, so they can be filtered.
+// Each property on the exported object will become the name of a list (a.k.a. the `listKey`),
+// with the value being the definition of the list, including the fields.
+export const lists = {
   // Here we define the user list.
   User: list({
-    // Here we can modify the admin UI. We want to show a user's name and post in the admin UI
-    ui: {
-      listView: {
-        initialColumns: ['name', 'posts'],
-      },
-    },
     // Here are the fields that `User` will have. We want an email and password so they can log in
     // a name so we can refer to them, and a way to connect users to posts.
     fields: {
@@ -52,14 +46,19 @@ export const lists = createSchema({
         isIndexed: 'unique',
         isFilterable: true,
       }),
-      // Passwords are hard. Our password field takes care of password problems
+      // The password field takes care of hiding details and hashing values
       password: password({ isRequired: true }),
-      // relationships allow us to reference other lists. In this case,
+      // Relationships allow us to reference other lists. In this case,
       // we want a user to have many posts, and we are saying that the user
       // should be referencable by the 'author' field of posts.
-      // Relationships are complicated. Make sure you read the docs
-      // to understand how they work: https://keystonejs.com/docs/guides/relationships#understanding-relationships
+      // Make sure you read the docs to understand how they work: https://keystonejs.com/docs/guides/relationships#understanding-relationships
       posts: relationship({ ref: 'Post.author', many: true }),
+    },
+    // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
+    ui: {
+      listView: {
+        initialColumns: ['name', 'posts'],
+      },
     },
   }),
   // Our second list is the Posts list. We've got a few more fields here
@@ -67,7 +66,7 @@ export const lists = createSchema({
   Post: list({
     fields: {
       title: text(),
-      // Having the status here will make us easy to choose whether to display
+      // Having the status here will make it easy for us to choose whether to display
       // posts on a live site.
       status: select({
         options: [
@@ -76,10 +75,14 @@ export const lists = createSchema({
         ],
         // We want to make sure new posts start off as a draft when they are created
         defaultValue: 'draft',
+        // fields also have the ability to configure their appearance in the Admin UI
         ui: {
           displayMode: 'segmented-control',
         },
       }),
+      // The document field can be used for making highly editable content. Check out our
+      // guide on the document field https://keystonejs.com/docs/guides/document-fields#how-to-use-document-fields
+      // for more information
       content: document({
         formatting: true,
         layouts: [
@@ -94,7 +97,7 @@ export const lists = createSchema({
       }),
       publishDate: timestamp(),
       // Here is the link from post => author.
-      // We've customised its UI display quite a lot.
+      // We've configured its UI display quite a lot to make the experience of editing posts better.
       author: relationship({
         ref: 'User.posts',
         ui: {
@@ -127,10 +130,7 @@ export const lists = createSchema({
     },
     fields: {
       name: text(),
-      posts: relationship({
-        ref: 'Post.tags',
-        many: true,
-      }),
+      posts: relationship({ ref: 'Post.tags', many: true }),
     },
   }),
-});
+};
