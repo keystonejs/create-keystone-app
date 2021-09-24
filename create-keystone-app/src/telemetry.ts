@@ -4,9 +4,8 @@ import Conf from 'conf';
 import { deviceInfo } from './deviceInfo';
 import pkgJson from '../package.json';
 
-const userConfig = new Conf();
+const userConfig = new Conf({ projectName: 'keystonejs' });
 const userTelemetryDisabled = userConfig.get('telemetry.disabled');
-
 if (userTelemetryDisabled) {
   process.env.KEYSTONE_TELEMETRY_DISABLED = '1';
 }
