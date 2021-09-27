@@ -120,6 +120,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
         await deleteAllData();
         browser = await playwright[browserName].launch();
         page = await browser.newPage();
+        page.setDefaultNavigationTimeout(60000);
         await page.goto('http://localhost:3000');
       });
       test('init user', async () => {
