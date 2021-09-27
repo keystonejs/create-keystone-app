@@ -32,6 +32,7 @@ if (!sessionSecret) {
 const { withAuth } = createAuth({
   listKey: 'User',
   identityField: 'email',
+  sessionData: 'name',
   secretField: 'password',
   initFirstItem: {
     // If there are no items in the database, keystone will ask you to create
