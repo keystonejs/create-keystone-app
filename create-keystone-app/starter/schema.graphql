@@ -81,7 +81,6 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
-  password: PasswordFilter
   posts: PostManyRelationFilter
 }
 
@@ -122,10 +121,6 @@ input NestedStringFilter {
   startsWith: String
   endsWith: String
   not: NestedStringFilter
-}
-
-input PasswordFilter {
-  isSet: Boolean!
 }
 
 input PostManyRelationFilter {
