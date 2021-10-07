@@ -117,7 +117,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       let page: playwright.Page = undefined as any;
       let browser: playwright.Browser = undefined as any;
       beforeAll(async () => {
-        await deleteAllData();
+        // await deleteAllData();
         browser = await playwright[browserName].launch();
         page = await browser.newPage();
         page.setDefaultNavigationTimeout(60000);
@@ -181,11 +181,11 @@ async function deleteAllData() {
 
   let prisma = new PrismaClient();
 
-  // await Promise.all([
-  //   prisma.post.deleteMany(),
-  //   prisma.tag.deleteMany(),
-  //   prisma.user.deleteMany(),
-  // ]);
+  await Promise.all([
+    prisma.post.deleteMany(),
+    prisma.tag.deleteMany(),
+    prisma.user.deleteMany(),
+  ]);
 
   await prisma.$disconnect();
 }
