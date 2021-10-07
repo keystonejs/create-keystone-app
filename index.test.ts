@@ -181,11 +181,11 @@ async function deleteAllData() {
 
   let prisma = new PrismaClient();
 
-  await Promise.all([
-    prisma.post.deleteMany(),
-    prisma.tag.deleteMany(),
-    prisma.user.deleteMany(),
-  ]);
+  // await Promise.all([
+  //   prisma.post.deleteMany(),
+  //   prisma.tag.deleteMany(),
+  //   prisma.user.deleteMany(),
+  // ]);
 
   await prisma.$disconnect();
 }
