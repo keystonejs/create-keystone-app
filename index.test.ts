@@ -111,7 +111,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
     });
   }
 
-  describe.each(['chromium', 'webkit', 'firefox'] as const)(
+  describe.each(['chromium'] as const)(
     '%s',
     (browserName) => {
       let page: playwright.Page = undefined as any;
