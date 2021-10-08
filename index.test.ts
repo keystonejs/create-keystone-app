@@ -179,6 +179,18 @@ async function deleteAllData() {
     './node_modules/.prisma/client'
   ));
 
+  const explicitDeterminePath = path.join(
+    projectDir,
+    './node_modules/.prisma/client'
+  );
+
+  console.log({
+    path: explicitDeterminePath,
+    resolvedPath: require.resolve(explicitDeterminePath),
+    projectDir,
+    PrismaClient,
+  });
+
   let prisma = new PrismaClient();
 
   await Promise.all([
