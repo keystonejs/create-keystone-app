@@ -15,7 +15,7 @@ A field: The individual bits of data on your list, each with its own type.
 // Like the `config` function we use in keystone.ts, we use functions
 // for putting in our config so we get useful errors. With typescript,
 // we get these even before code runs.
-import { createSchema, list } from '@keystone-next/keystone';
+import { list } from '@keystone-next/keystone';
 
 // We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
@@ -40,14 +40,14 @@ export const lists = {
     // Here are the fields that `User` will have. We want an email and password so they can log in
     // a name so we can refer to them, and a way to connect users to posts.
     fields: {
-      name: text({ isRequired: true }),
+      name: text({ validation: { isRequired: true } }),
       email: text({
-        isRequired: true,
+        validation: { isRequired: true },
         isIndexed: 'unique',
         isFilterable: true,
       }),
       // The password field takes care of hiding details and hashing values
-      password: password({ isRequired: true }),
+      password: password({ validation: { isRequired: true } }),
       // Relationships allow us to reference other lists. In this case,
       // we want a user to have many posts, and we are saying that the user
       // should be referencable by the 'author' field of posts.
