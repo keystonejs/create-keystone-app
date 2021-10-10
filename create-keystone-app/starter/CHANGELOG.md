@@ -1,5 +1,15 @@
 # keystone-next-app
 
+## 3.0.1
+
+### Patch Changes
+
+- [#218](https://github.com/keystonejs/create-keystone-app/pull/218) [`7547ee5`](https://github.com/keystonejs/create-keystone-app/commit/7547ee505c056cf18e7f9a6babdc0f51205b7d8c) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies to latest version.
+
+* [#207](https://github.com/keystonejs/create-keystone-app/pull/207) [`f449831`](https://github.com/keystonejs/create-keystone-app/commit/f4498310ea66db1b287701e2e50a2486617859d9) Thanks [@Noviny](https://github.com/Noviny)! - Add code comments to help out new users
+
+- [#212](https://github.com/keystonejs/create-keystone-app/pull/212) [`906412a`](https://github.com/keystonejs/create-keystone-app/commit/906412a1b3b791eeca90225e585c1bd91369a503) Thanks [@bladey](https://github.com/bladey)! - Updated README to refer to latest DB property when advising to use PostgresSQL.
+
 ## 3.0.0
 
 ### Major Changes
