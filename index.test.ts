@@ -117,7 +117,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       let page: playwright.Page = undefined as any;
       let browser: playwright.Browser = undefined as any;
       beforeAll(async () => {
-        await deleteAllData();
+        await deleteAllData(projectDir);
         browser = await playwright[browserName].launch();
         page = await browser.newPage();
         page.setDefaultNavigationTimeout(60000);
@@ -173,31 +173,31 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
   );
 });
 
-async function deleteAllData() {
-  const { PrismaClient } = require(path.join(
-    projectDir,
-    './node_modules/.prisma/client'
-  ));
+async function deleteAllData(projectDir: string) {
+  /**
+   * As of @prisma/client@3.1.1 it appears that the prisma client runtime tries to resolve the path to the prisma schema
+   * from process.cwd(). This is not always the project directory we want to run keystone from.
+   * Here we mutate the process.cwd global with a fn that returns the project directory we expect, such that prisma
+   * can retrieve the correct schema file.
+   */
+  const prevCwd = process.cwd;
+  try {
+    process.cwd = () => {
+      return projectDir;
+    };
+    const { PrismaClient } = require(path.join(
+      projectDir,
+      'node_modules/.prisma/client'
+    ));
 
-  const explicitDeterminePath = path.join(
-    projectDir,
-    './node_modules/.prisma/client'
-  );
+    let prisma = new PrismaClient();
 
-  console.log({
-    path: explicitDeterminePath,
-    resolvedPath: require.resolve(explicitDeterminePath),
-    projectDir,
-    PrismaClient,
-  });
+    await Promise.all(
+      Object.values(prisma).map((x: any) => x?.deleteMany?.({}))
+    );
 
-  let prisma = new PrismaClient();
-
-  await Promise.all([
-    prisma.post.deleteMany(),
-    prisma.tag.deleteMany(),
-    prisma.user.deleteMany(),
-  ]);
-
-  await prisma.$disconnect();
+    await prisma.$disconnect();
+  } finally {
+    process.cwd = prevCwd;
+  }
 }
