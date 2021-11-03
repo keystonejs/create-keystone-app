@@ -12,7 +12,7 @@ process.env.SESSION_SECRET =
   'HbGUBzUcVC4ghjg4w4T2Dz4z7dByYCz7GTAUDwaUEEFc2WxkjuPMyqnTtZ4H3hMp';
 
 // this'll take a while
-jest.setTimeout(100000);
+jest.setTimeout(500000);
 
 const promiseSignal = (): Promise<void> & { resolve: () => void } => {
   let resolve;
