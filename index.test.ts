@@ -118,11 +118,13 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       let page: playwright.Page = undefined as any;
       let browser: playwright.Browser = undefined as any;
       beforeAll(async () => {
-        await deleteAllData(projectDir);
-        browser = await playwright[browserName].launch();
-        page = await browser.newPage();
-        page.setDefaultNavigationTimeout(60000);
-        await page.goto('http://localhost:3000');
+        await retry(async () => {
+          await deleteAllData(projectDir);
+          browser = await playwright[browserName].launch();
+          page = await browser.newPage();
+          page.setDefaultNavigationTimeout(60000);
+          await page.goto('http://localhost:3000');
+        });
       });
       test('init user', async () => {
         await retry(async () => {
