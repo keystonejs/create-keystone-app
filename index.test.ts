@@ -154,7 +154,10 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
           ]);
           await page.type('label:has-text("Name") >> .. >> input', '1');
           await page.click('button:has-text("Save changes")');
-          await page.goto('http://localhost:3000/users');
+          await Promise.all([
+            page.waitForNavigation(),
+            page.click('nav >> text=Users'),
+          ]);
           expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
         });
       });
