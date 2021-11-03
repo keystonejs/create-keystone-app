@@ -46,7 +46,7 @@ jobs:
       - run: node ./node_modules/playwright/install.js
       - name: Tests
         run: yarn jest
-        timeout-minutes: 10
+        timeout-minutes: 20
         env:
           CREATE_PROJECT: ${{ matrix.createProject }}
 
