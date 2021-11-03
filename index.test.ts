@@ -4,6 +4,7 @@ import tempy from 'tempy';
 import path from 'path';
 import { promisify } from 'util';
 import _treeKill from 'tree-kill';
+import retry from 'async-retry';
 
 const treeKill = promisify(_treeKill);
 
@@ -124,47 +125,53 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
         await page.goto('http://localhost:3000');
       });
       test('init user', async () => {
-        await page.fill('label:has-text("Name") >> .. >> input', 'Admin');
-        await page.fill(
-          'label:has-text("Email") >> .. >> input',
-          'admin@keystonejs.com'
-        );
-        await page.click('button:has-text("Set Password")');
-        await page.fill('[placeholder="New Password"]', 'password');
-        await page.fill('[placeholder="Confirm Password"]', 'password');
-        await page.click('button:has-text("Get started")');
-        await page.uncheck('input[type="checkbox"]', { force: true });
-        await Promise.all([
-          page.waitForNavigation(),
-          page.click('text=Continue'),
-        ]);
+        await retry(async () => {
+          await page.fill('label:has-text("Name") >> .. >> input', 'Admin');
+          await page.fill(
+            'label:has-text("Email") >> .. >> input',
+            'admin@keystonejs.com'
+          );
+          await page.click('button:has-text("Set Password")');
+          await page.fill('[placeholder="New Password"]', 'password');
+          await page.fill('[placeholder="Confirm Password"]', 'password');
+          await page.click('button:has-text("Get started")');
+          await page.uncheck('input[type="checkbox"]', { force: true });
+          await Promise.all([
+            page.waitForNavigation(),
+            page.click('text=Continue'),
+          ]);
+        });
       });
 
       test('change name of admin', async () => {
-        await page.click('h3:has-text("Users")');
-        await Promise.all([
-          page.waitForNavigation(),
-          page.click('a:has-text("Admin")'),
-        ]);
-        await page.type('label:has-text("Name") >> .. >> input', '1');
-        await page.click('button:has-text("Save changes")');
-        await page.goto('http://localhost:3000/users');
-        expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
+        await retry(async () => {
+          await page.click('h3:has-text("Users")');
+          await Promise.all([
+            page.waitForNavigation(),
+            page.click('a:has-text("Admin")'),
+          ]);
+          await page.type('label:has-text("Name") >> .. >> input', '1');
+          await page.click('button:has-text("Save changes")');
+          await page.goto('http://localhost:3000/users');
+          expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
+        });
       });
 
       test('create post', async () => {
-        await Promise.all([
-          page.waitForNavigation({ timeout: 60000 }),
-          page.click('nav >> text=Posts'),
-        ]);
-        await page.click('button:has-text("Create Post")');
-        await page.fill('input[type="text"]', 'content');
-        await Promise.all([
-          page.waitForNavigation(),
-          page.click('form[role="dialog"] button:has-text("Create Post")'),
-        ]);
-        await page.type('input[type="text"]', '1');
-        await page.click('button:has-text("Save changes")');
+        await retry(async () => {
+          await Promise.all([
+            page.waitForNavigation({ timeout: 60000 }),
+            page.click('nav >> text=Posts'),
+          ]);
+          await page.click('button:has-text("Create Post")');
+          await page.fill('input[type="text"]', 'content');
+          await Promise.all([
+            page.waitForNavigation(),
+            page.click('form[role="dialog"] button:has-text("Create Post")'),
+          ]);
+          await page.type('input[type="text"]', '1');
+          await page.click('button:has-text("Save changes")');
+        });
       });
       afterAll(async () => {
         await browser.close();
