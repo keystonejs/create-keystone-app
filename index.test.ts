@@ -9,10 +9,10 @@ import retry from 'async-retry';
 const treeKill = promisify(_treeKill);
 
 process.env.SESSION_SECRET =
-  'adkjnfanskjdfnkjdsafnswkfjlswndjkfnwajskgfn wedjfbeqkhjfbqewhqewgkqegkjnknjjknwsdfkjnsdfkjn';
+  'HbGUBzUcVC4ghjg4w4T2Dz4z7dByYCz7GTAUDwaUEEFc2WxkjuPMyqnTtZ4H3hMp';
 
 // this'll take a while
-jest.setTimeout(100000);
+jest.setTimeout(300000);
 
 const promiseSignal = (): Promise<void> & { resolve: () => void } => {
   let resolve;
