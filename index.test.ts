@@ -118,65 +118,59 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       let page: playwright.Page = undefined as any;
       let browser: playwright.Browser = undefined as any;
       beforeAll(async () => {
+        await deleteAllData(projectDir);
+        browser = await playwright[browserName].launch();
+        page = await browser.newPage();
+        page.setDefaultNavigationTimeout(6000);
         await retry(async () => {
-          await deleteAllData(projectDir);
-          browser = await playwright[browserName].launch();
-          page = await browser.newPage();
-          page.setDefaultNavigationTimeout(6000);
           await page.goto('http://localhost:3000');
         });
       });
       test('init user', async () => {
-        await retry(async () => {
-          await page.fill('label:has-text("Name") >> .. >> input', 'Admin');
-          await page.fill(
-            'label:has-text("Email") >> .. >> input',
-            'admin@keystonejs.com'
-          );
-          await page.click('button:has-text("Set Password")');
-          await page.fill('[placeholder="New Password"]', 'password');
-          await page.fill('[placeholder="Confirm Password"]', 'password');
-          await page.click('button:has-text("Get started")');
-          await page.uncheck('input[type="checkbox"]', { force: true });
-          await Promise.all([
-            page.waitForNavigation(),
-            page.click('text=Continue'),
-          ]);
-        });
+        await page.fill('label:has-text("Name") >> .. >> input', 'Admin');
+        await page.fill(
+          'label:has-text("Email") >> .. >> input',
+          'admin@keystonejs.com'
+        );
+        await page.click('button:has-text("Set Password")');
+        await page.fill('[placeholder="New Password"]', 'password');
+        await page.fill('[placeholder="Confirm Password"]', 'password');
+        await page.click('button:has-text("Get started")');
+        await page.uncheck('input[type="checkbox"]', { force: true });
+        await Promise.all([
+          page.waitForNavigation(),
+          page.click('text=Continue'),
+        ]);
       });
 
       test('change name of admin', async () => {
-        await retry(async () => {
-          await page.click('h3:has-text("Users")');
-          await Promise.all([
-            page.waitForNavigation(),
-            page.click('a:has-text("Admin")'),
-          ]);
-          await page.type('label:has-text("Name") >> .. >> input', '1');
-          await page.click('button:has-text("Save changes")');
-          await Promise.all([
-            page.waitForNavigation(),
-            page.click('nav >> text=Users'),
-          ]);
-          expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
-        });
+        await page.click('h3:has-text("Users")');
+        await Promise.all([
+          page.waitForNavigation(),
+          page.click('a:has-text("Admin")'),
+        ]);
+        await page.type('label:has-text("Name") >> .. >> input', '1');
+        await page.click('button:has-text("Save changes")');
+        await Promise.all([
+          page.waitForNavigation(),
+          page.click('nav >> text=Users'),
+        ]);
+        expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
       });
 
       test('create post', async () => {
-        await retry(async () => {
-          await Promise.all([
-            page.waitForNavigation(),
-            page.click('nav >> text=Posts'),
-          ]);
-          await page.click('button:has-text("Create Post")');
-          await page.fill('input[type="text"]', 'content');
-          await Promise.all([
-            page.waitForNavigation(),
-            page.click('form[role="dialog"] button:has-text("Create Post")'),
-          ]);
-          await page.type('input[type="text"]', '1');
-          await page.click('button:has-text("Save changes")');
-        });
+        await Promise.all([
+          page.waitForNavigation(),
+          page.click('nav >> text=Posts'),
+        ]);
+        await page.click('button:has-text("Create Post")');
+        await page.fill('input[type="text"]', 'content');
+        await Promise.all([
+          page.waitForNavigation(),
+          page.click('form[role="dialog"] button:has-text("Create Post")'),
+        ]);
+        await page.type('input[type="text"]', '1');
+        await page.click('button:has-text("Save changes")');
       });
       afterAll(async () => {
         await browser.close();
