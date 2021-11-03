@@ -9,7 +9,7 @@ import retry from 'async-retry';
 const treeKill = promisify(_treeKill);
 
 process.env.SESSION_SECRET =
-  'adkjnfanskjdfnkjdsafnswkfjlswndjkfnwajskgfn wedjfbeqkhjfbqewhqewgkqegkjnknjjknwsdfkjnsdfkjn';
+  'HbGUBzUcVC4ghjg4w4T2Dz4z7dByYCz7GTAUDwaUEEFc2WxkjuPMyqnTtZ4H3hMp';
 
 // this'll take a while
 jest.setTimeout(100000);
@@ -118,11 +118,13 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       let page: playwright.Page = undefined as any;
       let browser: playwright.Browser = undefined as any;
       beforeAll(async () => {
-        await deleteAllData(projectDir);
-        browser = await playwright[browserName].launch();
-        page = await browser.newPage();
-        page.setDefaultNavigationTimeout(60000);
-        await page.goto('http://localhost:3000');
+        await retry(async () => {
+          await deleteAllData(projectDir);
+          browser = await playwright[browserName].launch();
+          page = await browser.newPage();
+          page.setDefaultNavigationTimeout(6000);
+          await page.goto('http://localhost:3000');
+        });
       });
       test('init user', async () => {
         await retry(async () => {
@@ -160,7 +162,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       test('create post', async () => {
         await retry(async () => {
           await Promise.all([
-            page.waitForNavigation({ timeout: 60000 }),
+            page.waitForNavigation(),
             page.click('nav >> text=Posts'),
           ]);
           await page.click('button:has-text("Create Post")');
