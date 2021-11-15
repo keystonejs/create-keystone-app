@@ -1926,7 +1926,7 @@
     "@keystone-ui/popover" "^4.0.5"
     apply-ref "^1.0.0"
 
-"@manypkg/cli@^0.19.0":
+"@manypkg/cli@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@manypkg/cli/-/cli-0.19.1.tgz#2dec45d340e1265276625c4b6c9b284d3376bd10"
   integrity sha512-EXBPPh6wYSKmSD5DdUjNG2rc55C2G/poIJ0D3O8tnk83o3nZh8g94JwN5/AumbSsDZ0yagmkS+DChNlRhIUG7w==
