@@ -1,5 +1,15 @@
 # keystone-next-app
 
+## 3.1.0
+
+### Minor Changes
+
+- [#241](https://github.com/keystonejs/create-keystone-app/pull/241) [`d6ff06d`](https://github.com/keystonejs/create-keystone-app/commit/d6ff06d3a80830f37d5da07738a69e0af2edc039) Thanks [@bladey](https://github.com/bladey)! - Added engines to package.json to indicate required version of Node.js to run Keystone.
+
+### Patch Changes
+
+- [#237](https://github.com/keystonejs/create-keystone-app/pull/237) [`a65ef75`](https://github.com/keystonejs/create-keystone-app/commit/a65ef75c8ca21007aade0c77a6482cbf145ff679) Thanks [@renovate](https://github.com/apps/renovate)! - Updated Keystone dependencies to latest version.
+
 ## 3.0.2
 
 ### Patch Changes
