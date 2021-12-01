@@ -25,20 +25,9 @@ type Args = {
 const versionInfo = () => {
   process.stdout.write('\n');
   console.log(`🚩 You're about to generate a project using ${c.bold(
-    'Keystone Next'
+    'Keystone 6'
   )} packages.
-
-🚏 If you'd like to use ${c.bold(
-    'Keystone 5'
-  )}, please use \`create-keystone-5-app\` instead.
-
-📖 Learn more about the changes between ${c.bold('Keystone 5')} and ${c.bold(
-    'Keystone Next'
-  )} on our ${terminalLink(
-    'website',
-    'https://keystonejs.com/guides/keystone-5-vs-keystone-next'
-  )}.
-  `);
+`);
 };
 
 async function normalizeArgs(): Promise<Args> {
