@@ -7,10 +7,10 @@ Welcome to the auth file! Here we have put a config to do basic auth in Keystone
 For more on auth, check out: https://keystonejs.com/docs/apis/auth#authentication-api
 */
 
-import { createAuth } from '@keystone-next/auth';
+import { createAuth } from '@keystone-6/auth';
 
 // See https://keystonejs.com/docs/apis/session#session-api for the session docs
-import { statelessSessions } from '@keystone-next/keystone/session';
+import { statelessSessions } from '@keystone-6/core/session';
 
 let sessionSecret = process.env.SESSION_SECRET;
 
