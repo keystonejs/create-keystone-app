@@ -1,20 +1,20 @@
 {
   "name": "keystone-app",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
-    "dev": "keystone-next dev",
-    "start": "keystone-next start",
-    "build": "keystone-next build",
-    "postinstall": "keystone-next postinstall"
+    "dev": "keystone dev",
+    "start": "keystone start",
+    "build": "keystone build",
+    "postinstall": "keystone postinstall"
   },
   "dependencies": {
-    "@keystone-next/auth": "^36.0.0",
-    "@keystone-next/fields-document": "^13.0.0",
-    "@keystone-next/keystone": "^28.0.0",
+    "@keystone-6/auth": "^1.0.0",
+    "@keystone-6/core": "^1.0.0",
+    "@keystone-6/fields-document": "^1.0.0",
     "typescript": "^4.5.2"
   },
   "engines": {
-    "node": "^12.20 || >= 14.13"
+    "node": "^14.15 || ^16.13"
   }
 }
