@@ -24,7 +24,7 @@ type Args = {
 
 const versionInfo = () => {
   process.stdout.write('\n');
-  console.log(`🚩 You're about to generate a project using ${c.bold(
+  console.log(`✨ You're about to generate a project using ${c.bold(
     'Keystone 6'
   )} packages.
 `);
