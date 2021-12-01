@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 6.0.0
+
+### Major Changes
+
+- [#260](https://github.com/keystonejs/create-keystone-app/pull/260) [`6288ac4`](https://github.com/keystonejs/create-keystone-app/commit/6288ac493d82a4f4f669f70daa2f24cefd8e375e) Thanks [@bladey](https://github.com/bladey)! - Updated to use Keystone 6.
+
 ## 5.1.0
 
 ### Minor Changes
