@@ -1943,10 +1943,10 @@
   resolved "https://registry.yarnpkg.com/@keystone-6/document-renderer/-/document-renderer-1.0.0.tgz#afedf84bdfcce8130d6f33daa9e477b08d5bc40c"
   integrity sha512-mumjqZ+6+m9GhPauJTuRPRZGiZSbYOVJlqBvRmiEcndCuXiTucpyOWmANkIqDQFtPMOy0b13Elpx20mh8eUC6g==
 
-"@keystone-6/fields-document@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@keystone-6/fields-document/-/fields-document-1.0.0.tgz#70dd4f623e2d2700350680824b99549571caf76c"
-  integrity sha512-aQiol7XjtwM+l2YoDdg+IZ4jShTtuGUvmhF3txFwK6qdjX7MTlwi1MQsz6Mbd+7UXUFz+XyfQTcuVioFzE1aVA==
+"@keystone-6/fields-document@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@keystone-6/fields-document/-/fields-document-1.0.1.tgz#d4ad90da33a3411100ed8d6669786f5084601c89"
+  integrity sha512-w/VvNH6JQ5R1k8Jnfa/QDsfJM28uTExEE6FJOmunbrZ5LrH0rWmaBz+7V4w712mnkbIut3hcVquAH9vNqGaSjQ==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@braintree/sanitize-url" "^5.0.2"
