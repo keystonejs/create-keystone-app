@@ -111,7 +111,7 @@ export const lists: Lists = {
           cardFields: ['name', 'email'],
           inlineEdit: { fields: ['name', 'email'] },
           linkToItem: true,
-          inlineCreate: { fields: ['name', 'email'] },
+          inlineConnect: true,
         },
       }),
       // We also link posts to tags. This is a many <=> many linking.
