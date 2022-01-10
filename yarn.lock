@@ -1662,10 +1662,10 @@
   resolved "https://registry.yarnpkg.com/@josephg/resolvable/-/resolvable-1.0.1.tgz#69bc4db754d79e1a2f17a650d3466e038d94a5eb"
   integrity sha512-CtzORUwWTTOTqfVtHaKRJ0I1kNQd1bpn3sUh8I3nJDVY+5/M/Oe1DnEWzPQvqq/xPIIkzzzIP7mfCoAjFRvDhg==
 
-"@keystone-6/auth@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@keystone-6/auth/-/auth-1.0.1.tgz#18f08dcc9f28fb537988afacf2d6331f3cee48de"
-  integrity sha512-KeeBVsLNXQiML9CCEJByHKQo6IuHQJtVZNmrD7GbY3bEtyUNOxaStGSo9G6ShR17BZqceGWIsXUOgVEMm9jJKg==
+"@keystone-6/auth@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@keystone-6/auth/-/auth-1.0.2.tgz#3c09d501fcf544e7d7f622e42fe8bed753eaac58"
+  integrity sha512-mxtNzSYbOefLToWaikUZgKdg/ZC62+9B8uwBcRyXLvy3JJb2dh/SeZWnU+4A7R9ooL3G/wJXwXPmXY+KDVGXqw==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@keystone-ui/button" "^6.0.0"
