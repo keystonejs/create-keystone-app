@@ -14,12 +14,17 @@ const starterDir = path.normalize(`${__dirname}/../starter`);
 const cli = meow(
   `
 Usage
-  $ create-keystone-app [directory]
+  $ create-keystone-app [directory] [flags: --use-npm]
 `
 );
 
+type Flags = {
+  useNpm?: boolean;
+};
+
 type Args = {
   directory: string;
+  flags: Flags;
 };
 
 const versionInfo = () => {
@@ -32,6 +37,9 @@ const versionInfo = () => {
 
 async function normalizeArgs(): Promise<Args> {
   let directory = cli.input[0];
+
+  const flags = cli.flags || {};
+
   if (!directory) {
     ({ directory } = await enquirer.prompt({
       type: 'input',
@@ -44,13 +52,14 @@ async function normalizeArgs(): Promise<Args> {
   }
   return {
     directory: path.resolve(directory),
+    flags,
   };
 }
 
-const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
-  const spinner = ora(
-    'Installing dependencies with yarn. This may take a few minutes.'
-  ).start();
+const attemptYarnInstall = async (
+  spinner: ora.Ora,
+  cwd: string
+): Promise<'yarn' | 'npm'> => {
   try {
     await execa('yarn', ['install'], { cwd });
     spinner.succeed('Installed dependencies with yarn.');
@@ -63,18 +72,39 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
       spinner.start(
         'Installing dependencies with npm. This may take a few minutes.'
       );
-      try {
-        await execa('npm', ['install'], { cwd });
-        spinner.succeed('Installed dependencies with npm.');
-      } catch (npmErr) {
-        spinner.fail('Failed to install with npm.');
-        throw npmErr;
-      }
-      process.stdout.write('\n');
-      return 'npm';
+      return attemptNpmInstall(spinner, cwd);
     }
     throw err;
   }
+};
+
+const attemptNpmInstall = async (
+  spinner: ora.Ora,
+  cwd: string
+): Promise<'npm'> => {
+  try {
+    await execa('npm', ['install'], { cwd });
+    spinner.succeed('Installed dependencies with npm.');
+  } catch (npmErr) {
+    spinner.fail('Failed to install with npm.');
+    throw npmErr;
+  }
+  process.stdout.write('\n');
+  return 'npm';
+};
+
+const installDeps = async (
+  cwd: string,
+  flags: Flags
+): Promise<'yarn' | 'npm'> => {
+  const packageManager: 'yarn' | 'npm' = flags.useNpm ? 'npm' : 'yarn';
+  const fn = flags.useNpm ? attemptNpmInstall : attemptYarnInstall;
+
+  let spinner = ora(
+    `Installing dependencies with ${packageManager}. This may take a few minutes.`
+  ).start();
+
+  return fn(spinner, cwd);
 };
 
 (async () => {
@@ -100,7 +130,10 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
       )
     ),
   ]);
-  const packageManager = await installDeps(normalizedArgs.directory);
+  const packageManager = await installDeps(
+    normalizedArgs.directory,
+    normalizedArgs.flags
+  );
   const relativeProjectDir = path.relative(
     process.cwd(),
     normalizedArgs.directory
