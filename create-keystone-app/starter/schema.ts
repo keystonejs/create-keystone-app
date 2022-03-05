@@ -111,6 +111,7 @@ export const lists: Lists = {
           cardFields: ['name', 'email'],
           inlineEdit: { fields: ['name', 'email'] },
           linkToItem: true,
+          inlineConnect: true,
           inlineCreate: { fields: ['name', 'email'] },
         },
       }),
