@@ -18,7 +18,7 @@ jobs:
         createProject: ['create project', 'from repo']
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js 14.x
         uses: actions/setup-node@main
@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js 14.x
         uses: actions/setup-node@main
