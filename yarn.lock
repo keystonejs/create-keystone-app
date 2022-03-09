@@ -1675,9 +1675,7 @@
   integrity sha512-CtzORUwWTTOTqfVtHaKRJ0I1kNQd1bpn3sUh8I3nJDVY+5/M/Oe1DnEWzPQvqq/xPIIkzzzIP7mfCoAjFRvDhg==
 
 "@keystone-6/auth@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@keystone-6/auth/-/auth-1.0.1.tgz#18f08dcc9f28fb537988afacf2d6331f3cee48de"
-  integrity sha512-KeeBVsLNXQiML9CCEJByHKQo6IuHQJtVZNmrD7GbY3bEtyUNOxaStGSo9G6ShR17BZqceGWIsXUOgVEMm9jJKg==
+  version: "1.0.2"
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@keystone-ui/button" "^6.0.0"
