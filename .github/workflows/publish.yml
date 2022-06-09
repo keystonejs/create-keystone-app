@@ -1,33 +1,35 @@
-name: Release
+name: Publish
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  release:
-    name: Release
+  publish:
+    name: Publish
     runs-on: ubuntu-latest
+    environment: release
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@main
+        uses: actions/checkout@master
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Setup Node.js LTS
-        uses: actions/setup-node@main
+        uses: actions/setup-node@master
         with:
           node-version: lts/*
 
       - name: Install Dependencies
-        run: yarn
+        # we have a postinstall script that uses is-ci which doesn't yet detect GitHub Actions
+        run: CI=true yarn
 
-      - name: Create Release Pull Request or Publish to npm
+      - name: Publish to npm
         uses: changesets/action@v1
         with:
+          version: yarn no-run-version-packages
           publish: yarn publish-changed
+          createGithubReleases: false
         env:
           # note that we're not using the GH token provided by Actions here because Actions has a rule that Actions
           # will not run as the result of another Action so CI wouldn't run on the release PRs then
