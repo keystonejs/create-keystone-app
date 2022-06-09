@@ -168,11 +168,11 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
             page.waitForNavigation(),
             page.click('nav >> text=Posts'),
           ]);
-          await page.click('button:has-text("Create Post")');
+          await page.click('a:has-text("Create Post")');
           await page.fill('input[type="text"]', 'content');
           await Promise.all([
             page.waitForNavigation(),
-            page.click('form[role="dialog"] button:has-text("Create Post")'),
+            page.click('button:has-text("Create Post")'),
           ]);
           await page.type('input[type="text"]', '1');
           await page.click('button:has-text("Save changes")');
