@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 7.0.0
+
+### Major Changes
+
+- [#311](https://github.com/keystonejs/create-keystone-app/pull/311) [`c6c8c7c`](https://github.com/keystonejs/create-keystone-app/commit/c6c8c7c1eb6aa488a4d91fd857d8517f09cef79b) Thanks [@borisno2](https://github.com/borisno2)! - Upgrade `@keystone-6/core` to `2.0.0` and `@keystone-6/auth` to `3.0.0`
+
 ## 6.0.1
 
 ### Patch Changes
