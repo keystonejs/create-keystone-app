@@ -1,4 +1,4 @@
-name: Release
+name: Create Release PR
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  release:
-    name: Release
+  release_pr:
+    name: Create Release PR
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -25,7 +25,7 @@ jobs:
         run: yarn
 
       - name: Create Release Pull Request
-        uses: changesets/action@master
+        uses: changesets/action@v1
         env:
           # note that we're not using the GH token provided by Actions here because Actions has a rule that Actions
           # will not run as the result of another Action so CI wouldn't run on the release PRs then
