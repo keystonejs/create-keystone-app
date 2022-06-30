@@ -3137,15 +3137,15 @@
   resolved "https://registry.yarnpkg.com/@js-joda/core/-/core-4.3.1.tgz#1df9f197d060f1eb087a895a5e33adb7f12b58fc"
   integrity sha512-oeaetlodcqVsiZDxnEcqsbs+sXBkASxua0mXs5OXuPQXz3/wdPTMlxwfQ4z2HKcOik3S9voW3QJkp/KLWDhvRQ==
 
-"@keystone-6/auth@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@keystone-6/auth/-/auth-3.0.0.tgz#7ec941c6a33f6f607ab4dd2fb833331b0456368f"
-  integrity sha512-kREhVoIJdIGHJzXn5QPshRULmMNwRp+hSW+sjjTb+owNlQLC9GWwym7aHq01NR8SK+Eb1tVOK2cNQ5wHfAuM9w==
+"@keystone-6/auth@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@keystone-6/auth/-/auth-4.0.0.tgz#2a6885630cb152d384d2a11617e2bad8fe7bbc13"
+  integrity sha512-q45iS1JvXyZ3CBH3Z2tpGD7WtGfAY1Z/oEpCd5VKAgyG9gRv8egEsgg1iTjVYwVBtEvPmlw7hmc3KsvM1c7PYw==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@keystone-ui/button" "^7.0.0"
     "@keystone-ui/core" "^5.0.0"
-    "@keystone-ui/fields" "^7.0.0"
+    "@keystone-ui/fields" "^7.1.0"
     "@keystone-ui/loading" "^6.0.0"
     "@keystone-ui/notice" "^6.0.0"
     cross-fetch "^3.1.4"
@@ -3260,10 +3260,10 @@
   resolved "https://registry.yarnpkg.com/@keystone-6/document-renderer/-/document-renderer-1.1.0.tgz#759f85f6a887109874af9c8638891dce030d970a"
   integrity sha512-Y9hCZGFzxyupmTauAhhxX0cqTzu6Iqz2fwGIjZyP/9I9WIrou+5ffSyQdOO1c0VzejopPdVRfmLPvsFWO+J0lA==
 
-"@keystone-6/fields-document@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@keystone-6/fields-document/-/fields-document-3.0.0.tgz#21462c581abe22a9494a0aecb0461b539555f1e6"
-  integrity sha512-pplDc9CJ+VcFuuPLvApqmYbyBFytJkd6rgiO4YeOalgDrzfpc/3MvzfZnDpeh0cgYpqo0aUsD0AgYhNlhkrCag==
+"@keystone-6/fields-document@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@keystone-6/fields-document/-/fields-document-4.0.0.tgz#69770c64bf2ad4bb65a9a6be9c1188bd97e0f010"
+  integrity sha512-uoRHxdMQxLimuiHKLgnme34poB6oCQreUA1oN0zJoQXA/2y1e3Ay9vmD1a/MlI5bP2l6/M2tAlXlj++6eXxCrw==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@braintree/sanitize-url" "^6.0.0"
@@ -3274,7 +3274,7 @@
     "@keystone-6/document-renderer" "^1.1.0"
     "@keystone-ui/button" "^7.0.0"
     "@keystone-ui/core" "^5.0.0"
-    "@keystone-ui/fields" "^7.0.0"
+    "@keystone-ui/fields" "^7.1.0"
     "@keystone-ui/icons" "^6.0.0"
     "@keystone-ui/popover" "^6.0.0"
     "@keystone-ui/tooltip" "^6.0.0"
@@ -3324,6 +3324,21 @@
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@keystone-ui/fields/-/fields-7.0.0.tgz#c19a8e54f60358a7202c2f76fc078921a4dad124"
   integrity sha512-Qc1Y19UVAoU5ZpxreRra3AenGwy9REm+OAPYpgX5li0tjsCAlEYxpAj2Q/9uoRHqC8qx4ZVLEAXoOTLk+GHQ+A==
+  dependencies:
+    "@babel/runtime" "^7.16.3"
+    "@keystone-ui/core" "^5.0.0"
+    "@keystone-ui/icons" "^6.0.0"
+    "@keystone-ui/popover" "^6.0.0"
+    date-fns "^2.26.0"
+    react "^18.1.0"
+    react-day-picker "^8.0.4"
+    react-focus-lock "^2.7.1"
+    react-select "^5.2.1"
+
+"@keystone-ui/fields@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@keystone-ui/fields/-/fields-7.1.0.tgz#e7ded277b1b294336c6aafe1960a730220e8140e"
+  integrity sha512-+ofiYKl690tSaT/QaVX+YMdJKCQigbUHv/C8LefpzykT8Co0uPQDfuHKb3lal9V43FkL+WSQ/dDAtN4HJQCw/g==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@keystone-ui/core" "^5.0.0"
