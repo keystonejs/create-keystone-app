@@ -31,16 +31,10 @@ import {
 // custom ones.
 import { document } from '@keystone-6/fields-document';
 
-// We are using Typescript, and we want our types experience to be as strict as it can be.
-// By providing the Keystone generated `Lists` type to our lists object, we refine
-// our types to a stricter subset that is type-aware of other lists in our schema
-// that Typescript cannot easily infer.
-import { Lists } from '.keystone/types';
-
 // We have a users list, a blogs list, and tags for blog posts, so they can be filtered.
 // Each property on the exported object will become the name of a list (a.k.a. the `listKey`),
 // with the value being the definition of the list, including the fields.
-export const lists: Lists = {
+export const lists = {
   // Here we define the user list.
   User: list({
     // Here are the fields that `User` will have. We want an email and password so they can log in
