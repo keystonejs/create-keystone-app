@@ -3,4 +3,4 @@
 'keystone-app': patch
 ---
 
-update dependencies for the latest `keystone-6` changes
+Fix dependencies and update schemas for the latest `keystone-6` release
