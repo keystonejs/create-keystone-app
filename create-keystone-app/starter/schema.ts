@@ -112,7 +112,6 @@ export const lists: Lists = {
           inlineEdit: { fields: ['name', 'email'] },
           linkToItem: true,
           inlineConnect: true,
-          inlineCreate: { fields: ['name', 'email'] },
         },
       }),
       // We also link posts to tags. This is a many <=> many linking.
