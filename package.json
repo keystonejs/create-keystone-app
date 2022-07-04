@@ -13,7 +13,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@changesets/changelog-github": "^0.4.3",
-    "@changesets/cli": "^2.21.1",
+    "@changesets/cli": "^2.23.0",
     "@manypkg/cli": "^0.19.1",
     "@preconstruct/cli": "^2.1.5",
     "@types/async-retry": "^1.4.4",
