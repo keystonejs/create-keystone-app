@@ -177,7 +177,7 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
           await page.type('input[type="text"]', '1');
           await page.click('button:has-text("Save changes")');
         });
-      });
+      }, 200000);
       afterAll(async () => {
         await browser.close();
       });
