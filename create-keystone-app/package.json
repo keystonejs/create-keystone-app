@@ -20,6 +20,6 @@
     "ora": "^5.4.1",
     "package-json": "^7.0.0",
     "semver": "^7.3.7",
-    "terminal-link": "^2.1.1"
+    "terminal-link": "^3.0.0"
   }
 }
