@@ -1,13 +1,19 @@
 {
   "extends": ["config:base"],
   "lockFileMaintenance": { "enabled": true },
+  "separateMinorPatch": false,
+  "separateMajorMinor": true,
   "prConcurrentLimit": 0,
+  "prHourlyLimit": 3,
+  "baseBranches": ["main"],
   "packageRules": [
     {
       "packagePatterns": ["keystone"],
       "groupName": "Keystone"
     }
   ],
-  "rangeStrategy": "bump",
-  "timezone": "Australia/Sydney"
+  "rangeStrategy": "replace",
+  "schedule": ["before 7am on Tuesday", "before 7am on Wednesday"],
+  "timezone": "Australia/Sydney",
+  "updateNotScheduled": false
 }
