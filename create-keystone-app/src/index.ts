@@ -44,7 +44,7 @@ async function normalizeArgs(): Promise<Args> {
     process.stdout.write('\n');
   }
   const directoryPath = path.resolve(directory);
-  sendTelemetryEvent('create-keystone-app:start', directory);
+  sendTelemetryEvent('create-keystone-app:start', directoryPath);
   return {
     directory: directoryPath,
   };
