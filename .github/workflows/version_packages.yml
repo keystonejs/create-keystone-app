@@ -1,31 +1,26 @@
-name: Create Release PR
+name: Version Packages
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   release_pr:
-    name: Create Release PR
+    name: Pull Request
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@main
+      - uses: actions/checkout@master
         with:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Setup Node.js LTS
-        uses: actions/setup-node@main
+      - uses: ./.github/actions/ci-setup
+
+      - uses: changesets/action@v1
         with:
-          node-version: lts/*
-
-      - name: Install Dependencies
-        run: yarn
-
-      - name: Create Release Pull Request
-        uses: changesets/action@v1
+          version: yarn version-packages
         env:
           # note that we're not using the GH token provided by Actions here because Actions has a rule that Actions
           # will not run as the result of another Action so CI wouldn't run on the release PRs then
