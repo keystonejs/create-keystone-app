@@ -1,5 +1,11 @@
 # keystone-next-app
 
+## 1.0.2
+
+### Patch Changes
+
+- [`3b4360a`](https://github.com/keystonejs/create-keystone-app/commit/3b4360a114f00094e40fdc89dd4c82e1456b9ae5) Thanks [@dcousens](https://github.com/dcousens)! - Fix graphql@^15.8.0 and next@12.2.4 as pseudo-peer dependencies until next `@keystone-6/core` release
+
 ## 1.0.1
 
 ### Patch Changes
