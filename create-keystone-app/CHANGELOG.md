@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 7.0.2
+
+### Patch Changes
+
+- [#357](https://github.com/keystonejs/create-keystone-app/pull/357) [`8a0a9c0`](https://github.com/keystonejs/create-keystone-app/commit/8a0a9c09e9a5a1436f63d60dd0ddf1b92b4ee4b1) Thanks [@dcousens](https://github.com/dcousens)! - Fix graphql@^15.8.0 and next@12.2.4 as pseudo-peer dependencies until next `@keystone-6/core` release
+
 ## 7.0.1
 
 ### Patch Changes
