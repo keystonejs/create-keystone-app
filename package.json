@@ -48,12 +48,12 @@
   },
   "// npm": "this is a temporary workaround for npm users, see https://github.com/keystonejs/create-keystone-app/pull/350",
   "overrides": {
-    "graphql": "^15.8.0",
+    "graphql": "^16.0.0",
     "next": "12.2.4"
   },
   "// yarn": "this is a temporary workaround for yarn users, see https://github.com/keystonejs/create-keystone-app/pull/350",
   "resolutions": {
-    "graphql": "^15.8.0",
+    "graphql": "^16.0.0",
     "next": "12.2.4"
   }
 }
