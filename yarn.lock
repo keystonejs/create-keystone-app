@@ -3027,9 +3027,9 @@
     graphql "^15.8.0"
 
 "@keystone-6/core@^2.1.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@keystone-6/core/-/core-2.3.0.tgz#aadb3932b61d834c586ca26b47bfb257587a8803"
-  integrity sha512-/IK7wEv78uy3C34eh2YxZmjoKDkpEEDxI49Fm2EfzV56o/C3hrF2WeNJ4rUYD+Kz++ZN74e/Pk/EI13pxtcbTg==
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@keystone-6/core/-/core-2.3.1.tgz#33171d8c0ac0a1f64c1e6a88b153718e2b0ec52f"
+  integrity sha512-C6Ngn2iydcUOD6MwFe6qIekq3el5RscJNpNZvOatEPGkFW3nKV34HNXsGXsn1Q9fCWRtlv2vwGI0pZO13xQ6cQ==
   dependencies:
     "@apollo/client" "3.6.9"
     "@aws-sdk/client-s3" "^3.83.0"
