@@ -134,7 +134,7 @@ export const lists: Lists = {
     //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
     access: allowAll,
 
-    // setting this to isHidden for the user interface prevents this being visible in the Admin UI
+    // setting this to isHidden for the user interface prevents this list being visible in the Admin UI
     ui: {
       isHidden: true,
     },
