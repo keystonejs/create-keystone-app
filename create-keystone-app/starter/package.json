@@ -9,21 +9,9 @@
     "postinstall": "keystone postinstall"
   },
   "dependencies": {
-    "@keystone-6/auth": "^4.0.0",
-    "@keystone-6/core": "^2.1.0",
-    "@keystone-6/fields-document": "^4.0.1",
-    "graphql": "^15.8.0",
-    "next": "12.2.4",
-    "typescript": "^4.7.4"
-  },
-  "// npm": "this is a temporary workaround for npm users, see https://github.com/keystonejs/create-keystone-app/pull/350",
-  "overrides": {
-    "graphql": "^15.8.0",
-    "next": "12.2.4"
-  },
-  "// yarn": "this is a temporary workaround for yarn users, see https://github.com/keystonejs/create-keystone-app/pull/350",
-  "resolutions": {
-    "graphql": "^15.8.0",
-    "next": "12.2.4"
+    "@keystone-6/auth": "^5.0.0",
+    "@keystone-6/core": "^3.0.1",
+    "@keystone-6/fields-document": "^5.0.0",
+    "typescript": "^4.8.0"
   }
 }

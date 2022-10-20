@@ -5,11 +5,12 @@ import path from 'path';
 import { promisify } from 'util';
 import _treeKill from 'tree-kill';
 import retry from 'async-retry';
+import { randomBytes } from 'crypto';
 
 const treeKill = promisify(_treeKill);
 
-process.env.SESSION_SECRET =
-  'HbGUBzUcVC4ghjg4w4T2Dz4z7dByYCz7GTAUDwaUEEFc2WxkjuPMyqnTtZ4H3hMp';
+// this is passed to Keystone
+process.env.SESSION_SECRET = randomBytes(32).toString('hex')
 
 // this'll take a while
 jest.setTimeout(100000);
@@ -54,7 +55,7 @@ let projectDir = path.join(__dirname, 'create-keystone-app', 'starter');
 
 // the order here is important
 // dev will initialise the database for prod
-describe.each(['dev', 'prod'] as const)('%s', (mode) => {
+describe.each(['development', 'production'] as const)('%s', (mode) => {
   let cleanupKeystoneProcess = () => {};
 
   afterAll(async () => {
@@ -88,13 +89,13 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
     await adminUIReady;
   }
 
-  if (mode === 'dev') {
+  if (mode === 'development') {
     test('start keystone in dev', async () => {
       await startKeystone('dev');
     });
   }
 
-  if (mode === 'prod') {
+  if (mode === 'production') {
     test('build keystone', async () => {
       let keystoneBuildProcess = promisifiedExecFile('yarn', ['build'], {
         cwd: projectDir,
