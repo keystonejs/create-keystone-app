@@ -25,7 +25,7 @@ import { statelessSessions } from '@keystone-6/core/session';
 //   especially in production (statelessSessions will throw if SESSION_SECRET is undefined)
 let sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret && process.env.NODE_ENV !== 'production') {
-  sessionSecret = randomBytes(32).toString('hex')
+  sessionSecret = randomBytes(32).toString('hex');
 }
 
 // withAuth is a function we can use to wrap our base configuration
@@ -41,15 +41,18 @@ const { withAuth } = createAuth({
 
   // dont support initFirstItem functionality in production
   //   see https://keystonejs.com/docs/config/auth#init-first-item for more
-  initFirstItem: process.env.NODE_ENV === 'production' ? undefined : {
-    // if there are no items in the database, by configuring this field
-    //   you are asking the Keystone AdminUI to create a new user
-    //   providing inputs for these fields
-    fields: ['name', 'email', 'password'],
+  initFirstItem:
+    process.env.NODE_ENV === 'production'
+      ? undefined
+      : {
+          // if there are no items in the database, by configuring this field
+          //   you are asking the Keystone AdminUI to create a new user
+          //   providing inputs for these fields
+          fields: ['name', 'email', 'password'],
 
-    // it uses context.sudo() to do this, which bypasses any access control you might have
-    //   you shouldn't use this in production
-  },
+          // it uses context.sudo() to do this, which bypasses any access control you might have
+          //   you shouldn't use this in production
+        },
 });
 
 // statelessSessions uses cookies for session tracking

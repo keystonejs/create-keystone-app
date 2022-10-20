@@ -55,7 +55,7 @@ export const lists: Lists = {
 
       createdAt: timestamp({
         // this sets the timestamp to Date.now() when the user is first created
-        defaultValue: { kind: 'now' }
+        defaultValue: { kind: 'now' },
       }),
     },
   }),
@@ -102,7 +102,7 @@ export const lists: Lists = {
 
         // a Post can only have one author
         //   this is the default, but we show it here for verbosity
-        many: false
+        many: false,
       }),
 
       // with this field, you can add some Tags to Posts
