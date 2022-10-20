@@ -9,9 +9,6 @@ import { randomBytes } from 'crypto';
 
 const treeKill = promisify(_treeKill);
 
-// this is passed to Keystone
-process.env.SESSION_SECRET = randomBytes(32).toString('hex')
-
 // this'll take a while
 jest.setTimeout(100000);
 
@@ -90,16 +87,23 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
   }
 
   if (mode === 'development') {
+    // process.env.SESSION_SECRET is randomly generated for this
+
     test('start keystone in dev', async () => {
       await startKeystone('dev');
     });
   }
 
   if (mode === 'production') {
+    process.env.SESSION_SECRET = randomBytes(32).toString('hex');
+
     test('build keystone', async () => {
       let keystoneBuildProcess = promisifiedExecFile('yarn', ['build'], {
         cwd: projectDir,
-        env: process.env,
+        env: {
+          ...process.env,
+          NODE_ENV: 'production',
+        },
       });
       const logChunk = (chunk: any) => {
         console.log(chunk.toString('utf8'));
