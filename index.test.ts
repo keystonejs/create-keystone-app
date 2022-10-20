@@ -59,10 +59,13 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
     await cleanupKeystoneProcess();
   });
 
-  async function startKeystone(command: 'start' | 'dev') {
+  async function startKeystone(
+    command: 'start' | 'dev',
+    env: Record<string, any> = process.env
+  ) {
     let keystoneProcess = childProcess.execFile('yarn', [command], {
       cwd: projectDir,
-      env: process.env,
+      env,
     });
     let adminUIReady = promiseSignal();
     let listener = (chunk: any) => {
@@ -95,14 +98,17 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
   }
 
   if (mode === 'production') {
-    process.env.SESSION_SECRET = randomBytes(32).toString('hex');
+    const env = {
+      NODE_ENV: 'production',
+      SESSION_SECRET: randomBytes(32).toString('hex'),
+    };
 
     test('build keystone', async () => {
-      let keystoneBuildProcess = promisifiedExecFile('yarn', ['build'], {
+      const keystoneBuildProcess = promisifiedExecFile('yarn', ['build'], {
         cwd: projectDir,
         env: {
           ...process.env,
-          NODE_ENV: 'production',
+          ...env,
         },
       });
       const logChunk = (chunk: any) => {
@@ -113,7 +119,10 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
       await keystoneBuildProcess;
     });
     test('start keystone in prod', async () => {
-      await startKeystone('start');
+      await startKeystone('start', {
+        ...process.env,
+        ...env,
+      });
     });
   }
 
