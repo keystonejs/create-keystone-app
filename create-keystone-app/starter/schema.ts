@@ -17,6 +17,8 @@ A field: The individual bits of data on your list, each with its own type.
 // we get these even before code runs.
 import { list } from '@keystone-6/core';
 
+import { allowAll } from '@keystone-6/core/access';
+
 // We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
 import {
@@ -43,6 +45,9 @@ import { Lists } from '.keystone/types';
 export const lists: Lists = {
   // Here we define the user list.
   User: list({
+    // For our starter, anyone can access our data
+    access: allowAll,
+
     // Here are the fields that `User` will have. We want an email and password so they can log in
     // a name so we can refer to them, and a way to connect users to posts.
     fields: {
@@ -60,6 +65,7 @@ export const lists: Lists = {
       // Make sure you read the docs to understand how they work: https://keystonejs.com/docs/guides/relationships#understanding-relationships
       posts: relationship({ ref: 'Post.author', many: true }),
     },
+
     // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
     ui: {
       listView: {
@@ -70,6 +76,9 @@ export const lists: Lists = {
   // Our second list is the Posts list. We've got a few more fields here
   // so we have all the info we need for displaying posts.
   Post: list({
+    // For our starter, anyone can access our data
+    access: allowAll,
+
     fields: {
       title: text(),
       // Having the status here will make it easy for us to choose whether to display
@@ -131,6 +140,9 @@ export const lists: Lists = {
   }),
   // Our final list is the tag list. This field is just a name and a relationship to posts
   Tag: list({
+    // For our starter, anyone can access our data
+    access: allowAll,
+
     ui: {
       isHidden: true,
     },
