@@ -5,11 +5,9 @@ import path from 'path';
 import { promisify } from 'util';
 import _treeKill from 'tree-kill';
 import retry from 'async-retry';
+import { randomBytes } from 'crypto';
 
 const treeKill = promisify(_treeKill);
-
-process.env.SESSION_SECRET =
-  'HbGUBzUcVC4ghjg4w4T2Dz4z7dByYCz7GTAUDwaUEEFc2WxkjuPMyqnTtZ4H3hMp';
 
 // this'll take a while
 jest.setTimeout(100000);
@@ -54,17 +52,20 @@ let projectDir = path.join(__dirname, 'create-keystone-app', 'starter');
 
 // the order here is important
 // dev will initialise the database for prod
-describe.each(['dev', 'prod'] as const)('%s', (mode) => {
+describe.each(['development', 'production'] as const)('%s', (mode) => {
   let cleanupKeystoneProcess = () => {};
 
   afterAll(async () => {
     await cleanupKeystoneProcess();
   });
 
-  async function startKeystone(command: 'start' | 'dev') {
+  async function startKeystone(
+    command: 'start' | 'dev',
+    env: Record<string, any> = process.env
+  ) {
     let keystoneProcess = childProcess.execFile('yarn', [command], {
       cwd: projectDir,
-      env: process.env,
+      env,
     });
     let adminUIReady = promiseSignal();
     let listener = (chunk: any) => {
@@ -88,17 +89,27 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
     await adminUIReady;
   }
 
-  if (mode === 'dev') {
+  if (mode === 'development') {
+    // process.env.SESSION_SECRET is randomly generated for this
+
     test('start keystone in dev', async () => {
       await startKeystone('dev');
     });
   }
 
-  if (mode === 'prod') {
+  if (mode === 'production') {
+    const env = {
+      NODE_ENV: 'production',
+      SESSION_SECRET: randomBytes(32).toString('hex'),
+    };
+
     test('build keystone', async () => {
-      let keystoneBuildProcess = promisifiedExecFile('yarn', ['build'], {
+      const keystoneBuildProcess = promisifiedExecFile('yarn', ['build'], {
         cwd: projectDir,
-        env: process.env,
+        env: {
+          ...process.env,
+          ...env,
+        },
       });
       const logChunk = (chunk: any) => {
         console.log(chunk.toString('utf8'));
@@ -108,7 +119,10 @@ describe.each(['dev', 'prod'] as const)('%s', (mode) => {
       await keystoneBuildProcess;
     });
     test('start keystone in prod', async () => {
-      await startKeystone('start');
+      await startKeystone('start', {
+        ...process.env,
+        ...env,
+      });
     });
   }
 

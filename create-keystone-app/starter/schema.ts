@@ -1,24 +1,15 @@
-/*
-Welcome to the schema! The schema is the heart of Keystone.
+// Welcome to your schema
+//   Schema driven development is Keystone's modus operandi
+//
+// This file is where we define the lists, fields and hooks for our data.
+// If you want to learn more about how lists are configured, please read
+// - https://keystonejs.com/docs/config/lists
 
-Here we define our 'lists', which will then be used both for the GraphQL
-API definition, our database tables, and our Admin UI layout.
-
-Some quick definitions to help out:
-A list: A definition of a collection of fields with a name. For the starter
-  we have `User`, `Post`, and `Tag` lists.
-A field: The individual bits of data on your list, each with its own type.
-  you can see some of the lists in what we use below.
-
-*/
-
-// Like the `config` function we use in keystone.ts, we use functions
-// for putting in our config so we get useful errors. With typescript,
-// we get these even before code runs.
 import { list } from '@keystone-6/core';
+import { allowAll } from '@keystone-6/core/access';
 
-// We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
-// for the full list of fields.
+// see https://keystonejs.com/docs/fields/overview for the full list of fields
+//   this is a few common fields for an example
 import {
   text,
   relationship,
@@ -26,69 +17,62 @@ import {
   timestamp,
   select,
 } from '@keystone-6/core/fields';
-// The document field is a more complicated field, so it's in its own package
-// Keystone aims to have all the base field types, but you can make your own
-// custom ones.
+
+// the document field is a more complicated field, so it has it's own package
 import { document } from '@keystone-6/fields-document';
+// if you want to make your own fields, see https://keystonejs.com/docs/guides/custom-fields
 
-// We are using Typescript, and we want our types experience to be as strict as it can be.
-// By providing the Keystone generated `Lists` type to our lists object, we refine
-// our types to a stricter subset that is type-aware of other lists in our schema
-// that Typescript cannot easily infer.
-import { Lists } from '.keystone/types';
+// when using Typescript, you can refine your types to a stricter subset by importing
+// the generated types from '.keystone/types'
+import type { Lists } from '.keystone/types';
 
-// We have a users list, a blogs list, and tags for blog posts, so they can be filtered.
-// Each property on the exported object will become the name of a list (a.k.a. the `listKey`),
-// with the value being the definition of the list, including the fields.
 export const lists: Lists = {
-  // Here we define the user list.
   User: list({
-    // Here are the fields that `User` will have. We want an email and password so they can log in
-    // a name so we can refer to them, and a way to connect users to posts.
+    // WARNING
+    //   for this starter project, anyone can create, query, update and delete anything
+    //   if you want to prevent random people on the internet from accessing your data,
+    //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
+    access: allowAll,
+
+    // this is the fields for our User list
     fields: {
+      // by adding isRequired, we enforce that every User should have a name
+      //   if no name is provided, an error will be displayed
       name: text({ validation: { isRequired: true } }),
+
       email: text({
         validation: { isRequired: true },
+        // by adding isIndexed: 'unique', we're saying that no user can have the same
+        // email as another user - this may or may not be a good idea for your project
         isIndexed: 'unique',
-        isFilterable: true,
       }),
-      // The password field takes care of hiding details and hashing values
+
       password: password({ validation: { isRequired: true } }),
-      // Relationships allow us to reference other lists. In this case,
-      // we want a user to have many posts, and we are saying that the user
-      // should be referencable by the 'author' field of posts.
-      // Make sure you read the docs to understand how they work: https://keystonejs.com/docs/guides/relationships#understanding-relationships
+
+      // we can use this field to see what Posts this User has authored
+      //   more on that in the Post list below
       posts: relationship({ ref: 'Post.author', many: true }),
-    },
-    // Here we can configure the Admin UI. We want to show a user's name and posts in the Admin UI
-    ui: {
-      listView: {
-        initialColumns: ['name', 'posts'],
-      },
+
+      createdAt: timestamp({
+        // this sets the timestamp to Date.now() when the user is first created
+        defaultValue: { kind: 'now' },
+      }),
     },
   }),
-  // Our second list is the Posts list. We've got a few more fields here
-  // so we have all the info we need for displaying posts.
+
   Post: list({
+    // WARNING
+    //   for this starter project, anyone can create, query, update and delete anything
+    //   if you want to prevent random people on the internet from accessing your data,
+    //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
+    access: allowAll,
+
+    // this is the fields for our Post list
     fields: {
-      title: text(),
-      // Having the status here will make it easy for us to choose whether to display
-      // posts on a live site.
-      status: select({
-        options: [
-          { label: 'Published', value: 'published' },
-          { label: 'Draft', value: 'draft' },
-        ],
-        // We want to make sure new posts start off as a draft when they are created
-        defaultValue: 'draft',
-        // fields also have the ability to configure their appearance in the Admin UI
-        ui: {
-          displayMode: 'segmented-control',
-        },
-      }),
-      // The document field can be used for making highly editable content. Check out our
-      // guide on the document field https://keystonejs.com/docs/guides/document-fields#how-to-use-document-fields
-      // for more information
+      title: text({ validation: { isRequired: true } }),
+
+      // the document field can be used for making rich editable content
+      //   you can find out more at https://keystonejs.com/docs/guides/document-fields
       content: document({
         formatting: true,
         layouts: [
@@ -101,11 +85,13 @@ export const lists: Lists = {
         links: true,
         dividers: true,
       }),
-      publishDate: timestamp(),
-      // Here is the link from post => author.
-      // We've configured its UI display quite a lot to make the experience of editing posts better.
+
+      // with this field, you can set a User as the author for a Post
       author: relationship({
+        // we could have used 'User', but then the relationship would only be 1-way
         ref: 'User.posts',
+
+        // this is some customisations for changing how this will look in the AdminUI
         ui: {
           displayMode: 'cards',
           cardFields: ['name', 'email'],
@@ -113,10 +99,21 @@ export const lists: Lists = {
           linkToItem: true,
           inlineConnect: true,
         },
+
+        // a Post can only have one author
+        //   this is the default, but we show it here for verbosity
+        many: false,
       }),
-      // We also link posts to tags. This is a many <=> many linking.
+
+      // with this field, you can add some Tags to Posts
       tags: relationship({
+        // we could have used 'Tag', but then the relationship would only be 1-way
         ref: 'Tag.posts',
+
+        // a Post can have many Tags, not just one
+        many: true,
+
+        // this is some customisations for changing how this will look in the AdminUI
         ui: {
           displayMode: 'cards',
           cardFields: ['name'],
@@ -125,17 +122,27 @@ export const lists: Lists = {
           inlineConnect: true,
           inlineCreate: { fields: ['name'] },
         },
-        many: true,
       }),
     },
   }),
-  // Our final list is the tag list. This field is just a name and a relationship to posts
+
+  // this last list is our Tag list, it only has a name field for now
   Tag: list({
+    // WARNING
+    //   for this starter project, anyone can create, query, update and delete anything
+    //   if you want to prevent random people on the internet from accessing your data,
+    //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
+    access: allowAll,
+
+    // setting this to isHidden for the user interface prevents this list being visible in the Admin UI
     ui: {
       isHidden: true,
     },
+
+    // this is the fields for our Tag list
     fields: {
       name: text(),
+      // this can be helpful to find out all the Posts associated with a Tag
       posts: relationship({ ref: 'Post.tags', many: true }),
     },
   }),
