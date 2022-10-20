@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 8.0.0
+
+### Major Changes
+
+- [#369](https://github.com/keystonejs/create-keystone-app/pull/369) [`0db3a2b`](https://github.com/keystonejs/create-keystone-app/commit/0db3a2b6f8108e0ef2e0c440cdbec969b475beb2) Thanks [@dcousens](https://github.com/dcousens)! - Upgrades `@keystone-6/*` to the newest set of major releases
+
 ## 7.0.2
 
 ### Patch Changes
