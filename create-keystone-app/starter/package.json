@@ -8,9 +8,7 @@
     "build": "keystone build",
     "postinstall": "keystone postinstall"
   },
-  "// @aws-sdk": "temporary dependency until https://github.com/keystonejs/keystone/issues/8023 is resolved",
   "dependencies": {
-    "@aws-sdk/util-endpoints": "^3.192.0",
     "@keystone-6/auth": "^5.0.0",
     "@keystone-6/core": "^3.0.1",
     "@keystone-6/fields-document": "^5.0.0",
