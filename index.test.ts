@@ -11,7 +11,7 @@ const treeKill = promisify(_treeKill);
 const execFileAsync = promisify(execFile);
 
 // some tests are slow
-jest.setTimeout(20000);
+jest.setTimeout(30000);
 
 // WARNING:
 //   the order of tests is important, and why we use --runInBand
@@ -104,7 +104,7 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
         ...process.env,
         ...env,
       });
-    }, 30000);
+    }, 40000);
   }
 
   describe.each(['chromium'] as const)('%s', (browserName) => {
@@ -147,6 +147,9 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
       await page.click('a:has-text("Create Post")');
       await page.fill('input[type="text"]', 'title');
       await page.click('button:has-text("Create Post")');
+      await page.waitForTimeout(2000); // sleep for a second or two
+      await page.fill('input[type="text"]', 'title again');
+      await page.click('button:has-text("Save changes")');
     });
 
     afterAll(async () => {
