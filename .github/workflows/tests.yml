@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        createProject: ['create project', 'from repo']
+        createProject: ['cka', 'cli']
     steps:
       - uses: actions/checkout@main
       - uses: ./.github/actions/ci-setup
@@ -31,7 +31,7 @@ jobs:
         run: yarn jest
         timeout-minutes: 10
         env:
-          CREATE_PROJECT: ${{ matrix.createProject }}
+          TEST_MATRIX_NAME: ${{ matrix.createProject }}
 
   linting:
     name: Linting

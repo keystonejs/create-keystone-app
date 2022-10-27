@@ -34,7 +34,7 @@
     "lint:prettier": "prettier --list-different \"**/*.{js,json,ts,tsx,md}\"",
     "lint:types": "tsc",
     "test": "yarn lint:prettier && yarn lint:types",
-    "test:unit": "DATABASE_URL=file:./keystone.db yarn jest",
+    "test:unit": "DATABASE_URL=file:./keystone.db yarn jest -- --runInBand",
     "publish-changed": "yarn build && changeset publish",
     "no-run-version-packages": "echo \"This workflow should not be run when there are changesets on main\" && exit 1"
   },
