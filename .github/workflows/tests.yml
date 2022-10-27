@@ -22,30 +22,8 @@ jobs:
       matrix:
         createProject: ['create project', 'from repo']
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js 14.x
-        uses: actions/setup-node@main
-        with:
-          node-version: 14.x
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: |
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            node_modules
-          key: ${{ runner.os }}-yarn-v5-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-v5-
-
-      - name: Install Dependencies
-        run: yarn
+      - uses: actions/checkout@main
+      - uses: ./.github/actions/ci-setup
 
       - uses: microsoft/playwright-github-action@v1
       - run: node ./node_modules/playwright/install.js
@@ -59,33 +37,14 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@main
+      - uses: ./.github/actions/ci-setup
 
-      - name: Setup Node.js 14.x
-        uses: actions/setup-node@main
-        with:
-          node-version: 14.x
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: |
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            node_modules
-          key: ${{ runner.os }}-yarn-v5-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-v5-
-
-      - name: Install Dependencies
-        run: yarn
       - name: Prettier
         run: yarn lint:prettier
+
       - name: TypeScript
         run: yarn lint:types
+
       - name: Preconstruct
         run: yarn build
