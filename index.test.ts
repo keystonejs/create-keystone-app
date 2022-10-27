@@ -11,7 +11,7 @@ const treeKill = promisify(_treeKill);
 const execFileAsync = promisify(execFile);
 
 // some tests are slow
-jest.setTimeout(30000);
+jest.setTimeout(100000);
 
 // WARNING:
 //   the order of tests is important, and why we use --runInBand
@@ -35,7 +35,7 @@ if (process.env.TEST_MATRIX_NAME === 'cka') {
     createKeystoneAppProcess.child.stdout!.pipe(process.stdout);
     await createKeystoneAppProcess;
     projectDir = path.join(cwd, 'test-project');
-  }, 60000);
+  });
 }
 
 async function startKeystone(
@@ -79,7 +79,7 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
     // process.env.SESSION_SECRET is randomly generated for this
     test('start keystone in dev', async () => {
       cleanupKeystoneProcess = await startKeystone('dev');
-    }, 40000);
+    });
   } else if (mode === 'production') {
     const env = {
       NODE_ENV: 'production',
@@ -97,14 +97,14 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
       keystoneBuildProcess.child.stdout!.pipe(process.stdout);
       keystoneBuildProcess.child.stderr!.pipe(process.stdout);
       await keystoneBuildProcess;
-    }, 100000);
+    });
 
     test('start keystone in prod', async () => {
       cleanupKeystoneProcess = await startKeystone('start', {
         ...process.env,
         ...env,
       });
-    }, 40000);
+    });
   }
 
   describe.each(['chromium'] as const)('%s', (browserName) => {
