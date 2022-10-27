@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 8.0.1
+
+### Patch Changes
+
+- [#374](https://github.com/keystonejs/create-keystone-app/pull/374) [`7b5851a`](https://github.com/keystonejs/create-keystone-app/commit/7b5851ab1e5b6f937440f8d7aad60eb4b18e9dd5) Thanks [@dcousens](https://github.com/dcousens)! - Removes `@aws-sdk/util-endpoints` from dependencies as https://github.com/keystonejs/keystone/issues/8023 is resolved
+
 ## 8.0.0
 
 ### Major Changes
