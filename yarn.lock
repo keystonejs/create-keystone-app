@@ -974,7 +974,7 @@
     "@aws-sdk/types" "3.193.0"
     tslib "^2.3.1"
 
-"@aws-sdk/util-endpoints@3.194.0", "@aws-sdk/util-endpoints@^3.192.0":
+"@aws-sdk/util-endpoints@3.194.0":
   version "3.194.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/util-endpoints/-/util-endpoints-3.194.0.tgz#0cd08a96eebf85e7d250d7dfea19dd0e79a7848a"
   integrity sha512-G+DGC3Zx0GnQpt4DpRmVcCfliNxf3nwBtZ3JIdCptkUZgDEpLYzOfjbf3bUyPTQh+oGHeqfnVAF+rFjTnYql3A==
