@@ -15,25 +15,7 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@apollo/client@3.6.9":
-  version "3.6.9"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.6.9.tgz#ad0ee2e3a3c92dbed4acd6917b6158a492739d94"
-  integrity sha512-Y1yu8qa2YeaCUBVuw08x8NHenFi0sw2I3KCu7Kw9mDSu86HmmtHJkCAifKVrN2iPgDTW/BbP3EpSV8/EQCcxZA==
-  dependencies:
-    "@graphql-typed-document-node/core" "^3.1.1"
-    "@wry/context" "^0.6.0"
-    "@wry/equality" "^0.5.0"
-    "@wry/trie" "^0.3.0"
-    graphql-tag "^2.12.6"
-    hoist-non-react-statics "^3.3.2"
-    optimism "^0.16.1"
-    prop-types "^15.7.2"
-    symbol-observable "^4.0.0"
-    ts-invariant "^0.10.3"
-    tslib "^2.3.0"
-    zen-observable-ts "^1.2.5"
-
-"@apollo/client@^3.6.6":
+"@apollo/client@^3.7.0":
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.7.1.tgz#86ce47c18a0714e229231148b0306562550c2248"
   integrity sha512-xu5M/l7p9gT9Fx7nF3AQivp0XukjB7TM7tOd5wifIpI8RskYveL4I+rpTijzWrnqCPZabkbzJKH7WEAKdctt9w==
@@ -3096,11 +3078,11 @@
     graphql "^16.6.0"
 
 "@keystone-6/core@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@keystone-6/core/-/core-3.0.1.tgz#2dfe84cd1588ea1cad6794bc3e0fa04fed291487"
-  integrity sha512-Vpc4vXO9E1XXaIrxBlKYBpy4bidRCXgFjDhuytQi5juG02ciybWEyawiXseOZ/jlt/6gKm+3RmcX/QjWfajUTQ==
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@keystone-6/core/-/core-3.0.2.tgz#ac578ad0c95b3c4884593a692562bc605418bc68"
+  integrity sha512-vZt7zcWiBXmRv8j6d/ZEKQQgqip2VzzPzVSuH0QIsIYBeRLtAQ0NdjflFJlHAsJ9R//OlbVNPk+TRRSG3uilwg==
   dependencies:
-    "@apollo/client" "3.6.9"
+    "@apollo/client" "^3.7.0"
     "@aws-sdk/client-s3" "^3.83.0"
     "@aws-sdk/lib-storage" "^3.83.0"
     "@aws-sdk/s3-request-presigner" "^3.83.0"
@@ -3130,7 +3112,7 @@
     "@prisma/internals" "4.3.1"
     "@prisma/migrate" "4.3.1"
     "@sindresorhus/slugify" "^1.1.2"
-    "@types/apollo-upload-client" "17.0.1"
+    "@types/apollo-upload-client" "17.0.2"
     "@types/bcryptjs" "^2.4.2"
     "@types/cookie" "^0.5.0"
     "@types/express" "^4.17.13"
@@ -3155,6 +3137,7 @@
     cookie "^0.5.0"
     cors "^2.8.5"
     cuid "^2.1.8"
+    dataloader "^2.1.0"
     date-fns "^2.26.0"
     decimal.js "^10.4.1"
     dumb-passwords "^0.2.1"
@@ -3952,12 +3935,12 @@
   dependencies:
     "@types/node" "*"
 
-"@types/apollo-upload-client@17.0.1":
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/@types/apollo-upload-client/-/apollo-upload-client-17.0.1.tgz#7aca38e160097162024d7b427d66168c3874ab1d"
-  integrity sha512-8+JEhQdfDcauKnRhpedDAhlJoSD9hv+AJwYF3GvG7SusoGzHuoWlOsJbQXK1p1n+WJYHD4BNAZ+HtpGeIVMrpw==
+"@types/apollo-upload-client@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@types/apollo-upload-client/-/apollo-upload-client-17.0.2.tgz#15dc737663928be27c768117603dfc23c21514bb"
+  integrity sha512-NphAiBqzZv3iY8Cq+qWyi0QUFFzJ+nVd7QKI/iKV8RfILrpYDL69F/vlhjn4BNxKlmc3LxJHymcf3gFzLBwuZQ==
   dependencies:
-    "@apollo/client" "^3.6.6"
+    "@apollo/client" "^3.7.0"
     "@types/extract-files" "*"
     graphql "14 - 16"
 
@@ -5439,7 +5422,7 @@ dataloader@^1.4.0:
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-1.4.0.tgz#bca11d867f5d3f1b9ed9f737bd15970c65dff5c8"
   integrity sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==
 
-dataloader@^2.0.0:
+dataloader@^2.0.0, dataloader@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.1.0.tgz#c69c538235e85e7ac6c6c444bae8ecabf5de9df7"
   integrity sha512-qTcEYLen3r7ojZNgVUaRggOI+KM7jrKxXeSHhogh/TWxYMeONEMqY+hmkobiYQozsGIyg9OYVzO4ZIfoB4I0pQ==
