@@ -120,7 +120,7 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
 
     test('create user', async () => {
       await page.goto('http://localhost:3000');
-      await page.fill('label:has-text("Name") >> .. >> input', 'Admin');
+      await page.fill('label:has-text("Name") >> .. >> input', 'Admin1');
       await page.fill(
         'label:has-text("Email") >> .. >> input',
         'admin@keystonejs.com'
@@ -135,11 +135,11 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
 
     test('change admin name', async () => {
       await page.click('h3:has-text("Users")');
-      await page.click('a:has-text("Admin")');
-      await page.type('label:has-text("Name") >> .. >> input', '1');
+      await page.click('a:has-text("Admin1")');
+      await page.fill('label:has-text("Name") >> .. >> input', 'Admin2');
       await page.click('button:has-text("Save changes")');
       await page.click('nav >> text=Users');
-      expect(await page.textContent('a:has-text("Admin1")')).toBe('Admin1');
+      expect(await page.textContent('a:has-text("Admin2")')).toBe('Admin2');
     });
 
     test('create a post', async () => {
