@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 8.1.0
+
+### Minor Changes
+
+- [#383](https://github.com/keystonejs/create-keystone-app/pull/383) [`ec456c8`](https://github.com/keystonejs/create-keystone-app/commit/ec456c8df25127c26fb4af4e4a037928c9cda8d8) Thanks [@dcousens](https://github.com/dcousens)! - Upgrades `@keystone-6/*` to the newest minor release
+
 ## 8.0.2
 
 ### Patch Changes
