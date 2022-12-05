@@ -18,7 +18,7 @@
     "fs-extra": "^10.1.0",
     "meow": "^9.0.0",
     "ora": "^5.4.1",
-    "package-json": "^7.0.0",
+    "package-json": "^8.0.0",
     "semver": "^7.3.7",
     "terminal-link": "^2.1.1"
   }
