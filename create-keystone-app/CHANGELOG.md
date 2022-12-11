@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 9.0.0
+
+### Major Changes
+
+- [#390](https://github.com/keystonejs/create-keystone-app/pull/390) [`b7705c2`](https://github.com/keystonejs/create-keystone-app/commit/b7705c23662c9f09920177e1ef619ed14a156dec) Thanks [@emmatown](https://github.com/emmatown)! - Upgrades @keystone-6/\* to the newest major release
+
 ## 8.1.0
 
 ### Minor Changes
