@@ -23,6 +23,8 @@ jest.setTimeout(100000);
 //   https://playwright.dev/docs/inspector
 
 let projectDir = path.join(__dirname, 'create-keystone-app', 'starter');
+// cli and cka tests use different prisma client locations (only used for calling Prisma's deleteMany)
+let prismaClientLocation = '@prisma/client';
 
 if (process.env.TEST_MATRIX_NAME === 'cka') {
   test('can create a basic project', async () => {
@@ -35,6 +37,7 @@ if (process.env.TEST_MATRIX_NAME === 'cka') {
     createKeystoneAppProcess.child.stdout!.pipe(process.stdout);
     await createKeystoneAppProcess;
     projectDir = path.join(cwd, 'test-project');
+    prismaClientLocation = path.join(projectDir, 'node_modules/.prisma/client');
   });
 }
 
@@ -112,7 +115,7 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
     let browser: playwright.Browser = undefined as any;
 
     beforeAll(async () => {
-      await deleteAllData(projectDir);
+      await deleteAllData(projectDir, prismaClientLocation);
       browser = await playwright[browserName].launch();
       page = await browser.newPage();
       page.setDefaultNavigationTimeout(6000);
@@ -158,7 +161,7 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
   });
 });
 
-async function deleteAllData(projectDir: string) {
+async function deleteAllData(projectDir: string, prismaClientLocation: string) {
   /**
    * As of @prisma/client@3.1.1 it appears that the prisma client runtime tries to resolve the path to the prisma schema
    * from process.cwd(). This is not always the project directory we want to run keystone from.
@@ -170,7 +173,7 @@ async function deleteAllData(projectDir: string) {
     process.cwd = () => {
       return projectDir;
     };
-    const { PrismaClient } = require('@prisma/client');
+    const { PrismaClient } = require(prismaClientLocation);
 
     const prisma = new PrismaClient();
 
