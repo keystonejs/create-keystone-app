@@ -170,10 +170,7 @@ async function deleteAllData(projectDir: string) {
     process.cwd = () => {
       return projectDir;
     };
-    const { PrismaClient } = require(path.join(
-      projectDir,
-      'node_modules/.prisma/client'
-    ));
+    const { PrismaClient } = require('@prisma/client');
 
     const prisma = new PrismaClient();
 
