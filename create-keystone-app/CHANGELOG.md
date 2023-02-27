@@ -1,5 +1,11 @@
 # create-keystone-app
 
+## 9.0.1
+
+### Patch Changes
+
+- [#398](https://github.com/keystonejs/create-keystone-app/pull/398) [`827990d`](https://github.com/keystonejs/create-keystone-app/commit/827990d49820b4377d9093a0b4a803d5a13add6a) Thanks [@borisno2](https://github.com/borisno2)! - Update Keystone-6 to `5.0.0`
+
 ## 9.0.0
 
 ### Major Changes
