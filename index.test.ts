@@ -24,7 +24,7 @@ jest.setTimeout(100000);
 
 let projectDir = path.join(__dirname, 'create-keystone-app', 'starter');
 // cli and cka tests use different prisma client locations (only used for calling Prisma's deleteMany)
-let prismaClientLocation = '@prisma/client';
+let prismaClientLocation = '.prisma/client';
 
 if (process.env.TEST_MATRIX_NAME === 'cka') {
   test('can create a basic project', async () => {
@@ -75,7 +75,7 @@ async function startKeystone(
 describe.each(['development', 'production'] as const)('%s', (mode) => {
   let cleanupKeystoneProcess = () => {};
   afterAll(async () => {
-    await cleanupKeystoneProcess();
+    cleanupKeystoneProcess();
   });
 
   if (mode === 'development') {
@@ -115,7 +115,7 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
     let browser: playwright.Browser = undefined as any;
 
     beforeAll(async () => {
-      await deleteAllData(projectDir, prismaClientLocation);
+      await deleteAllData(prismaClientLocation);
       browser = await playwright[browserName].launch();
       page = await browser.newPage();
       page.setDefaultNavigationTimeout(6000);
@@ -161,28 +161,12 @@ describe.each(['development', 'production'] as const)('%s', (mode) => {
   });
 });
 
-async function deleteAllData(projectDir: string, prismaClientLocation: string) {
-  /**
-   * As of @prisma/client@3.1.1 it appears that the prisma client runtime tries to resolve the path to the prisma schema
-   * from process.cwd(). This is not always the project directory we want to run keystone from.
-   * Here we mutate the process.cwd global with a fn that returns the project directory we expect, such that prisma
-   * can retrieve the correct schema file.
-   */
-  const prevCwd = process.cwd;
-  try {
-    process.cwd = () => {
-      return projectDir;
-    };
-    const { PrismaClient } = require(prismaClientLocation);
+async function deleteAllData(prismaClientLocation: string) {
+  const { PrismaClient } = require(prismaClientLocation);
 
-    const prisma = new PrismaClient();
+  const prisma = new PrismaClient();
 
-    await Promise.all(
-      Object.values(prisma).map((x: any) => x?.deleteMany?.({}))
-    );
+  await Promise.all(Object.values(prisma).map((x: any) => x?.deleteMany?.({})));
 
-    await prisma.$disconnect();
-  } finally {
-    process.cwd = prevCwd;
-  }
+  await prisma.$disconnect();
 }
