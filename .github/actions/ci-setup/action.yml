@@ -3,7 +3,7 @@ runs:
   using: 'composite'
   steps:
     - name: Setup Node.js LTS
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         # preferably lts/*, but we hit API limits when querying that
         node-version: 16
