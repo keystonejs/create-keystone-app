@@ -125,7 +125,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
   )} to customize your app.
   - ${terminalLink('Open the Admin UI', 'http://localhost:3000')}
   - ${terminalLink('Open the Graphql API', 'http://localhost:3000/api/graphql')}
-  - ${terminalLink('Read the docs', 'https://next.keystonejs.com')}
+  - ${terminalLink('Read the docs', 'https://keystonejs.com')}
   - ${terminalLink(
     'Star Keystone on GitHub',
     'https://github.com/keystonejs/keystone'
