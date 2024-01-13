@@ -47,32 +47,24 @@ async function normalizeArgs(): Promise<Args> {
   };
 }
 
-const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
+function pkgManagerFromUserAgent(userAgent: string | undefined) {
+  if (!userAgent) return 'npm';
+  const pkgSpec = userAgent.split(' ')[0];
+  const [name, _version] = pkgSpec.split('/');
+  return name ?? 'npm';
+}
+
+const installDeps = async (cwd: string): Promise<string> => {
+  const pkgManager = pkgManagerFromUserAgent(process.env.npm_config_user_agent);
   const spinner = ora(
-    'Installing dependencies with yarn. This may take a few minutes.'
+    `Installing dependencies with ${pkgManager}. This may take a few minutes.`
   ).start();
   try {
-    await execa('yarn', ['install'], { cwd });
-    spinner.succeed('Installed dependencies with yarn.');
-    return 'yarn';
-  } catch (_err: any) {
-    let err: ExecaError = _err;
-    if (err.failed) {
-      process.stdout.write('\n');
-      spinner.warn('Failed to install with yarn.');
-      spinner.start(
-        'Installing dependencies with npm. This may take a few minutes.'
-      );
-      try {
-        await execa('npm', ['install'], { cwd });
-        spinner.succeed('Installed dependencies with npm.');
-      } catch (npmErr) {
-        spinner.fail('Failed to install with npm.');
-        throw npmErr;
-      }
-      process.stdout.write('\n');
-      return 'npm';
-    }
+    await execa(pkgManager, ['install'], { cwd });
+    spinner.succeed(`Installed dependencies with ${pkgManager}.`);
+    return pkgManager;
+  } catch (err) {
+    spinner.fail(`Failed to install with ${pkgManager}.`);
     throw err;
   }
 };
@@ -113,7 +105,7 @@ const installDeps = async (cwd: string): Promise<'yarn' | 'npm'> => {
   ${c.bold('To launch your app, run:')}
 
   - cd ${relativeProjectDir}
-  - ${packageManager === 'yarn' ? 'yarn' : 'npm run'} dev
+  - ${packageManager} run dev
 
   ${c.bold('Next steps:')}
 
